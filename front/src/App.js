@@ -6,10 +6,6 @@ import { Login, Register } from "./pages";
 function App() {
   return (
     <div className="App">
-      {/* <BrowserRouter>
-        <Route path="/home" element={<div>Home</div> />
-        <Route path="/about" element={<div>About</div>} />
-      </BrowserRouter> */}
       <BrowserRouter>
         <Routes>
           <Route path="*" element={<Login />} />
