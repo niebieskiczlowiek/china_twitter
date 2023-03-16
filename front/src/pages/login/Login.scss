@@ -1,0 +1,53 @@
+.login {
+  background: rgb(228, 213, 207);
+  height: 100vh;
+  align-items: center;
+
+  .loginContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    width: 20%;
+    height: 50%;
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    margin: 0 auto;
+    border-radius: 10px;
+
+    .header {
+      font-size: 50px;
+      position: fixed;
+      top: 20%;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+
+      input {
+        margin: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid rgb(228, 213, 207);
+        font-size: 20px;
+      }
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid rgb(228, 213, 207);
+      font-size: 20px;
+      background: rgb(228, 213, 207);
+
+      &:hover {
+        background: rgb(189, 169, 161);
+        opacity: 0.8;
+      }
+    }
+  }
+}
