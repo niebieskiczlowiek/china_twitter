@@ -1,40 +1,42 @@
-import React from "react";
-import "./Login.scss";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import './Login.scss';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
-  const navigate = useNavigate();
+    const emailRef = React.createRef();
+    const passwordRef = React.createRef();
 
-  return (
-    <div className="login">
-      <div className="loginContainer">
-        <h1 className="header">Sign in</h1>
-        <div className="links">
-          <button
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
-            Sign in
-          </button>
-          <button
-            onClick={() => {
-              navigate("/register");
-            }}
-          >
-            Sign up
-          </button>
+    const navigate = useNavigate();
+
+    const loginHandler = async (e) => {
+        e.preventDefault();
+
+        const data = {
+            
+            email: emailRef.current.value,
+            password: passwordRef.current.value
+
+        }
+
+        const response = await axios.post('/api/login', data)
+
+        if (response.data.success) {
+            sessionStorage.setItem('token', response.data.token);
+            navigate('/dashboard');
+        }
+    };
+
+    return (
+        <div className='Login-container'>
+            <h1>Mailer admin</h1>
+            <form>
+                <input ref={emailRef} type='text' placeholder='Email' />
+                <input ref={passwordRef} type='password' placeholder='Password' />
+                <button onClick={loginHandler}>Zaloguj</button>
+            </form>
         </div>
-        <div className="form">
-          <form>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-          </form>
-          <button type="submit">Sign In</button>
-        </div>
-      </div>
-    </div>
-  );
+    )
 };
 
 export default Login;
