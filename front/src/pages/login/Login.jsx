@@ -29,7 +29,23 @@ const Login = () => {
 
     return (
         <div className='Login-container'>
-            <h1>Mailer admin</h1>
+            <h1>Sign in</h1>
+            <div className="links">
+                <button
+                    onClick={() => {
+                    navigate("/login");
+                    }}
+                >
+                    Sign in
+                </button>
+                <button
+                    onClick={() => {
+                    navigate("/register");
+                    }}
+                >
+                    Sign up
+                </button>
+            </div>
             <form>
                 <input ref={emailRef} type='text' placeholder='Email' />
                 <input ref={passwordRef} type='password' placeholder='Password' />
