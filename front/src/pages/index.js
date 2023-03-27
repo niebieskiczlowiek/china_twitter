@@ -1,5 +1,6 @@
 import Login from "./login/Login";
 import Register from "./register/Register";
 import Check from "./checkConnection/Check"
+import Home from "./homepage/Home"
 
-export { Login, Register, Check };
+export { Login, Register, Home, Check };

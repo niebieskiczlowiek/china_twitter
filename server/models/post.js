@@ -5,7 +5,7 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  hasztag: {
+  hashtag: {
     type: String,
     required: true,
   },
@@ -19,6 +19,6 @@ const postSchema = new mongoose.Schema({
   },
 });
 
-const Post = mongoose.model('Post', postSchema);
+const Post = mongoose.model('posts', postSchema);
 
 module.exports = Post;

@@ -28,29 +28,31 @@ const Login = () => {
     };
 
     return (
-        <div className='Login-container'>
-            <h1>Sign in</h1>
-            <div className="links">
-                <button
-                    onClick={() => {
-                    navigate("/login");
-                    }}
-                >
-                    Sign in
-                </button>
-                <button
-                    onClick={() => {
-                    navigate("/register");
-                    }}
-                >
-                    Sign up
-                </button>
+        <div className='login'>
+            <div className="loginContainer">
+                <h1 className="header">Sign in</h1>
+                <div className="links">
+                    <button
+                        onClick={() => {
+                        navigate("/login");
+                        }}
+                    >
+                        Sign in
+                    </button>
+                    <button
+                        onClick={() => {
+                        navigate("/register");
+                        }}
+                    >
+                        Sign up
+                    </button>
+                </div>
+                <form className="form">
+                    <input ref={emailRef} type='text' placeholder='Email' />
+                    <input ref={passwordRef} type='password' placeholder='Password' />
+                    <button onClick={loginHandler}>Zaloguj</button>
+                </form>
             </div>
-            <form>
-                <input ref={emailRef} type='text' placeholder='Email' />
-                <input ref={passwordRef} type='password' placeholder='Password' />
-                <button onClick={loginHandler}>Zaloguj</button>
-            </form>
         </div>
     )
 };
