@@ -27,7 +27,28 @@ const Home = () => {
     getPosts();
   }, []);
 
-  
+  const handleSubmit = async () => {
+    const hashtags = content.match(/#[a-zA-Z0-9]+/g);
+
+    const payload = {
+      title, content, hashtags
+    }
+
+    try {
+      const response = await axios.post("/api/posts/add", payload)
+
+      if (response.data.success) {
+        console.log(response.data);
+        setTitle("");
+        setContent("");
+        getPosts();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   const handlePostWriter = () => {
     setPostWriter(!postWriter);
   }
@@ -39,23 +60,6 @@ const Home = () => {
   const handleContentChange = (e) => {
     setContent(e.target.value);
   }
-
-  const handleSubmit = async () => {
-    const payload = {
-      title, content
-    }
-
-    try {
-      const response = await axios.post("/api/posts/add", payload)
-
-      if (response.data.success) {
-        console.log(response.data);
-        getPosts();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
 
   return ( 

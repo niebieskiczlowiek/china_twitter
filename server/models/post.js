@@ -5,8 +5,8 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  hashtag: {
-    type: String,
+  hashtags: {
+    type: Array,
     required: true,
   },
   content: {

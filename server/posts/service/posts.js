@@ -6,7 +6,7 @@ const add_post = async (req, res) => {
 
     const post = {
         title : data.title,
-        hashtag : "#twojamatka",
+        hashtags: data.hashtags,
         content : data.content,
         date : Date.now(),
 
