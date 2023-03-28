@@ -23,7 +23,7 @@ const Login = () => {
 
         if (response.data.success) {
             sessionStorage.setItem('token', response.data.token);
-            navigate('/dashboard');
+            navigate('/homepage');
         }
     };
 
@@ -50,8 +50,8 @@ const Login = () => {
                 <form className="form">
                     <input ref={emailRef} type='text' placeholder='Email' />
                     <input ref={passwordRef} type='password' placeholder='Password' />
-                    <button onClick={loginHandler}>Zaloguj</button>
                 </form>
+                <button onClick={loginHandler}>Zaloguj</button>
             </div>
         </div>
     )
