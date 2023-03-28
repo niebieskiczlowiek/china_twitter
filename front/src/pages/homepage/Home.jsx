@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import "./Home.scss";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,6 +8,24 @@ const Home = () => {
   const [postWriter, setPostWriter] = React.useState(false);
   const [title, setTitle] = React.useState('');
   const [content, setContent] = React.useState('');
+  const [posts, setPosts] = React.useState([])
+
+  const getPosts = async () => {
+    try {
+      const response = await axios.get('/api/posts/get');
+
+      if (response.data.success) {
+        console.log(response.data);
+        setPosts(response.data.posts)
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getPosts();
+  }, []);
 
   
   const handlePostWriter = () => {
@@ -31,11 +50,12 @@ const Home = () => {
 
       if (response.data.success) {
         console.log(response.data);
+        getPosts();
       }
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
 
   return ( 
@@ -47,10 +67,9 @@ const Home = () => {
         Create Post
       </button>
 
-
       {postWriter
         ?  ( <div className="postWriter">
-            <form>
+            <form className="form">
               <input 
                 type="text" 
                 placeholder="Title" 
@@ -58,19 +77,35 @@ const Home = () => {
                 onChange = {handleTitleChange}
               />
 
-              <input 
+              <textarea
                 type="text" 
                 placeholder="Content"
                 value = {content}
                 onChange = {handleContentChange}  
               />
             </form>
+
             <button type="submit"
               onClick = {handleSubmit}
             >Submit</button>
 
           </div> )
           : null }
+
+
+        <div className="posts">
+          {posts.map((post, index) => {
+            return (
+              <div className="post" key={post._id}>
+                <h1>{post.title}</h1>
+                <p>
+                  {post.content}
+                </p>
+                <a>{post.hashtag}</a>
+              </div>
+            )
+          })}
+        </div>
 
     </div>
 

@@ -23,7 +23,7 @@ const Login = () => {
 
         if (response.data.success) {
             sessionStorage.setItem('token', response.data.token);
-            navigate('/homepage');
+            navigate('/home');
         }
     };
 

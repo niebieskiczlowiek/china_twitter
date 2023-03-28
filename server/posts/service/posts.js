@@ -22,6 +22,16 @@ const add_post = async (req, res) => {
 
 };
 
+const get_posts = async (req, res) => {
+    try {
+        const posts = await Post.find({});
+        return res.status(200).json({ success: true, posts})
+    } catch (error) {
+        return res.status(500).json({ success: false });
+    }
+};
+
 module.exports = {
     add_post,
+    get_posts,
 };
