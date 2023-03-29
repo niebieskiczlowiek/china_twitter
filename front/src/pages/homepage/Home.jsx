@@ -50,24 +50,8 @@ const Home = () => {
       const response = await axios.get('/api/posts/get_tags')
 
       if (response.data.success) {
-        const hashtags = response.data.allTags
-        const uniqTags = [...new Set(hashtags)]
-
-        const count_tags = (tag) => {
-          const count = 0;
-          hashtags.forEach( current_tag => {
-            if ( current_tag === tag ) {
-              count += 1
-            }
-          })
-          return [tag, count]
-        }
-
-        const countedTags = uniqTags.forEach( 
-          tag => count_tags(tag)
-        )
-      
-        setPopularHashtags(countedTags)
+        const hashtags = response.data.countedTags
+        setPopularHashtags(hashtags)
       }
     } catch (error) {
       console.log(error);
@@ -144,9 +128,11 @@ const Home = () => {
      <div className="rightSideContainer">
           <h1>Popular hashtags</h1>
           <div className="hashtags">
-            {popularHashtags.map((hashtag, index) => {
+            {popularHashtags.map((hashtag,  index) => {
               return (
-                <p>{hashtag[0]}{hashtag[1]}</p>
+                <p>
+                  {hashtag.tag} ({hashtag.count})
+                </p>
                 )
               }
             )}
