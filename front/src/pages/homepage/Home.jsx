@@ -25,7 +25,8 @@ const Home = () => {
   };
 
   const handleSubmit = async () => {
-    const hashtags = content. match(/#[a-zA-Z0-9]+/g);
+    // const hashtags = content. match(/#[a-zA-Z0-9]+/g);
+    const hashtags = content.match(/(?<=#)\w+/g);
 
     const payload = {
       title, content, hashtags
@@ -56,6 +57,10 @@ const Home = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const hashtagFilter = async (e) => {
+    console.log(e.target.innerText);
   };
 
   const handlePostWriter = () => {
@@ -130,9 +135,13 @@ const Home = () => {
           <div className="hashtags">
             {popularHashtags.map((hashtag,  index) => {
               return (
-                <p>
-                  {hashtag.tag} ({hashtag.count})
-                </p>
+                <div className="hashtag"
+                  onClick = { hashtagFilter }
+                >
+                  <p>
+                    {hashtag.tag} ({hashtag.count}) 
+                  </p>
+                </div>
                 )
               }
             )}

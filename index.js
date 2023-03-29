@@ -15,7 +15,7 @@ app.use(checkApi);
 app.use(loginApi);
 app.use(postApi); 
 
-const db = 'mongodb+srv://Admin:gCLe2OnO9gbcL8wF@twitter.6jwx7au.mongodb.net/test';
+const db = 'mongodb+srv://Admin:gCLe2OnO9gbcL8wF@twitter.6jwx7au.mongodb.net/twitter';
 
 mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 mongoose.connection.on('connected', () => {
