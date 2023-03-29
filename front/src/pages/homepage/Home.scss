@@ -1,11 +1,41 @@
-.postWriter {
+.home{
   display: flex;
-  flex-direction: column;
-  width: 20%;
-  margin: 0 auto;
+  flex-direction: row;
+  justify-content: center;
 
-  .form {
+  .mainContainer{
     display: flex;
     flex-direction: column;
+    width: 60%;
+    margin: 0 auto;
+    position: relative;
+    left: 0;
+    top: 0;
+  }
+
+  .rightSideContainer {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin: 0 auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+  }
+
+  .postWriter {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin: 0 auto;
+  
+    position: fixed;
+    left: 0;
+    top: 0;
+  
+    .form {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }

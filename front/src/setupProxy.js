@@ -7,6 +7,7 @@ module.exports = function(app) {
       '/api/login',
       '/api/posts/add',
       '/api/posts/get',
+      '/api/posts/get_tags',
     ],
     createProxyMiddleware({
       target: 'http://localhost:8080',
