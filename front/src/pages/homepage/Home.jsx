@@ -25,7 +25,6 @@ const Home = () => {
   };
 
   const handleSubmit = async () => {
-    // const hashtags = content. match(/#[a-zA-Z0-9]+/g);
     const hashtags = content.match(/(?<=#)\w+/g);
 
     const payload = {
@@ -34,24 +33,26 @@ const Home = () => {
 
     try {
       const response = await axios.post("/api/posts/add", payload)
+      const response2 = await axios.post("/api/hashtags/post", hashtags )
 
-      if (response.data.success) {
-        console.log(response.data);
+      if (response.data.success && response2.data.success) {
         setTitle("");
         setContent("");
         getPosts();
+        getPopularHashtags();
       }
+
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handlePopularHashtags = async () => {
+  const getPopularHashtags = async () => {
     try {
-      const response = await axios.get('/api/posts/get_tags')
+      const response = await axios.get('/api/hashtags/get_popular')
 
       if (response.data.success) {
-        const hashtags = response.data.countedTags
+        const hashtags = response.data.hashtags;
         setPopularHashtags(hashtags)
       }
     } catch (error) {
@@ -77,7 +78,7 @@ const Home = () => {
 
   useEffect(() => {
     getPosts();
-    handlePopularHashtags();
+    getPopularHashtags();
   }, []);
 
 
@@ -139,7 +140,7 @@ const Home = () => {
                   onClick = { hashtagFilter }
                 >
                   <p>
-                    {hashtag.tag} ({hashtag.count}) 
+                    {hashtag.hashtag} ({hashtag.count}) 
                   </p>
                 </div>
                 )

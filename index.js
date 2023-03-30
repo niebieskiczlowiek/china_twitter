@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const loginApi = require("./server/login");
 const checkApi = require("./server/check");
 const postApi = require("./server/posts");
+const hashtagApi = require("./server/hashtags")
 
 app.use('/', express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -14,6 +15,7 @@ app.use(cookieParser());
 app.use(checkApi);
 app.use(loginApi);
 app.use(postApi); 
+app.use(hashtagApi);
 
 const db = 'mongodb+srv://Admin:gCLe2OnO9gbcL8wF@twitter.6jwx7au.mongodb.net/twitter';
 
