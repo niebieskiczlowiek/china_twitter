@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const loginApi = require("./server/login");
+const registerApi = require("./server/register");
 const checkApi = require("./server/check");
 const postApi = require("./server/posts");
 const hashtagApi = require("./server/hashtags")

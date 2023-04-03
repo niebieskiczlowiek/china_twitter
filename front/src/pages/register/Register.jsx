@@ -12,7 +12,7 @@ const Register = () => {
         <div className="links">
           <button
             onClick={() => {
-              navigate("/login");
+              navigate("/");
             }}
           >
             Sign in
@@ -27,6 +27,8 @@ const Register = () => {
         </div>
         <div className="form">
           <form>
+            <input type="text" placeholder="Username" />
+            <input type="text" placeholder="Full Name" />
             <input type="email" placeholder="Email" />
             <input type="password" placeholder="Password" />
           </form>

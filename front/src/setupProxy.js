@@ -5,6 +5,7 @@ module.exports = function(app) {
     [
       '/api/check',
       '/api/login',
+      '/api/register',
       '/api/posts/add',
       '/api/posts/get',
       '/api/posts/get_tags',
