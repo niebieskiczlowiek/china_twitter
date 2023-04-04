@@ -17,6 +17,7 @@ app.use(checkApi);
 app.use(loginApi);
 app.use(postApi); 
 app.use(hashtagApi);
+app.use(registerApi);
 
 const db = 'mongodb+srv://Admin:gCLe2OnO9gbcL8wF@twitter.6jwx7au.mongodb.net/twitter';
 
