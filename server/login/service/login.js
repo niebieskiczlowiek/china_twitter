@@ -9,8 +9,8 @@ const login = async (req, res) => {
 
         if (!user) return res.status(200).json({ success: false });
 
-        if (data.password === user.password && user.admin) {
-            const token = jwt.sign({ email: user.email }, 'admin4123');
+        if (data.password === user.password) {
+            const token = jwt.sign({ email: user.email }, "secret", { expiresIn: "1h" });
 
             return res.status(200).json({ success: true, token });
         } else {
