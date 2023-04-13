@@ -25,7 +25,7 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useCreat
 mongoose.connection.on('connected', () => {
   console.log('Connected with database');
 });
-  
+
 app.listen(process.env.PORT || 8080, () => {
   console.log(`Server up and running on port ${process.env.PORT || 8080}`);
 });

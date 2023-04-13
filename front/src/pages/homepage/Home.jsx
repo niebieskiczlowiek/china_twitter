@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import "./Home.scss";
 import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 const Home = () => {
@@ -10,6 +11,19 @@ const Home = () => {
   const [content, setContent] = React.useState('');
   const [posts, setPosts] = React.useState([])
   const [popularHashtags, setPopularHashtags] = React.useState([])
+  const navigate = useNavigate();
+
+  function checkLogin() {
+    const isLoggedIn = localStorage.getItem('secret');
+    
+
+    if (isLoggedIn === 'true') {
+      return true;
+    }
+
+    navigate('/');
+    return false;
+  }
 
   const getPosts = async () => {
     try {
@@ -76,10 +90,13 @@ const Home = () => {
     setContent(e.target.value);
   }
 
+
   useEffect(() => {
+    checkLogin();
     getPosts();
     getPopularHashtags();
   }, []);
+
 
 
   return ( 
