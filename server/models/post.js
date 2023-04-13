@@ -7,7 +7,7 @@ const postSchema = new mongoose.Schema({
   },
   hashtags: {
     type: Array,
-    required: true,
+    required: false,
   },
   content: {
     type: String,

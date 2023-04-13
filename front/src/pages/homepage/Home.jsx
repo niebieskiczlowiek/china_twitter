@@ -8,8 +8,9 @@ const Home = () => {
   const [postWriter, setPostWriter] = React.useState(false);
   const [title, setTitle] = React.useState('');
   const [content, setContent] = React.useState('');
-  const [posts, setPosts] = React.useState([])
-  const [popularHashtags, setPopularHashtags] = React.useState([])
+  const [posts, setPosts] = React.useState([]);
+  const [popularHashtags, setPopularHashtags] = React.useState([]);
+  const [currentUser, setCurrentUser] = React.useState('');
 
   const getPosts = async () => {
     try {
@@ -22,6 +23,12 @@ const Home = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const getCurrentUser = async () => {
+      const token = sessionStorage.getItem('token');
+
+      setCurrentUser(token);
   };
 
   const handleSubmit = async () => {
@@ -108,6 +115,10 @@ const Home = () => {
 
           </div> )
           : null }
+
+      <div className="leftSideContainer">
+        <h1>debil</h1>
+      </div>
 
      <div className="mainContainer">
       <h1>Home</h1>

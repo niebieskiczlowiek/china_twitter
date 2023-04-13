@@ -22,7 +22,7 @@ const Login = () => {
         const response = await axios.post('/api/login', data)
 
         if (response.data.success) {
-            sessionStorage.setItem('token', response.data.token);
+            sessionStorage.setItem('token', response.data.test);
             navigate('/home');
         }
     };

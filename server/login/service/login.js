@@ -11,8 +11,9 @@ const login = async (req, res) => {
 
         if (data.password === user.password) {
             const token = jwt.sign({ email: user.email }, "secret", { expiresIn: "1h" });
+            const test = "test"
 
-            return res.status(200).json({ success: true, token });
+            return res.status(200).json({ success: true, user, token, test });
         } else {
             return res.status(200).json({ success: false });
         } 
