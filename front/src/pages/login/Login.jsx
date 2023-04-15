@@ -21,8 +21,14 @@ const Login = () => {
 
         const response = await axios.post('/api/login', data)
 
+        const sessionData = {
+            token: response.data.token,
+            user: response.data.currentUser
+        }
+
         if (response.data.success) {
-            sessionStorage.setItem('token', response.data.test);
+            sessionStorage.setItem("token", sessionData.token)
+            sessionStorage.setItem("user", sessionData.user)
             navigate('/home');
         }
     };

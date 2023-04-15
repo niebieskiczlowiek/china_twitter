@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import "./Home.scss";
 import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 const Home = () => {
@@ -11,6 +12,19 @@ const Home = () => {
   const [posts, setPosts] = React.useState([]);
   const [popularHashtags, setPopularHashtags] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState('');
+  const navigate = useNavigate();
+
+  function checkLogin() {
+    const isLoggedIn = sessionStorage.getItem("token")
+    if (isLoggedIn) {
+      navigate('/home');
+      const user = sessionStorage.getItem("user")
+      console.log(user)
+      setCurrentUser(user)
+    } else {
+      navigate('/');
+    }
+  }
 
   const getPosts = async () => {
     try {
@@ -23,12 +37,6 @@ const Home = () => {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const getCurrentUser = async () => {
-      const token = sessionStorage.getItem('token');
-
-      setCurrentUser(token);
   };
 
   const handleSubmit = async () => {
@@ -83,10 +91,13 @@ const Home = () => {
     setContent(e.target.value);
   }
 
+
   useEffect(() => {
+    checkLogin();
     getPosts();
     getPopularHashtags();
   }, []);
+
 
 
   return ( 
@@ -117,7 +128,7 @@ const Home = () => {
           : null }
 
       <div className="leftSideContainer">
-        <h1>debil</h1>
+        <h1>{currentUser}</h1>
       </div>
 
      <div className="mainContainer">
