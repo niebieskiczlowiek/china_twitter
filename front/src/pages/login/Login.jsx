@@ -23,12 +23,14 @@ const Login = () => {
 
         const sessionData = {
             token: response.data.token,
-            user: response.data.currentUser
+            username: response.data.username,
+            fullName: response.data.fullName
         }
 
         if (response.data.success) {
             sessionStorage.setItem("token", sessionData.token)
-            sessionStorage.setItem("user", sessionData.user)
+            sessionStorage.setItem("username", sessionData.username)
+            sessionStorage.setItem("fullName", sessionData.fullName)
             navigate('/home');
         }
     };

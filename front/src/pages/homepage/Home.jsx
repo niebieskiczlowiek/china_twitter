@@ -11,16 +11,19 @@ const Home = () => {
   const [content, setContent] = React.useState('');
   const [posts, setPosts] = React.useState([]);
   const [popularHashtags, setPopularHashtags] = React.useState([]);
-  const [currentUser, setCurrentUser] = React.useState('');
+  const [currentUsername, setCurrentUsername] = React.useState('');
+  const [currentFullName, setCurrentFullName] = React.useState('');
   const navigate = useNavigate();
 
   function checkLogin() {
     const isLoggedIn = sessionStorage.getItem("token")
     if (isLoggedIn) {
       navigate('/home');
-      const user = sessionStorage.getItem("user")
-      console.log(user)
-      setCurrentUser(user)
+      const username = sessionStorage.getItem("username")
+      const fullName = sessionStorage.getItem("fullName")
+      console.log(username, fullName)
+      setCurrentUsername(username)
+      setCurrentFullName(fullName)
     } else {
       navigate('/');
     }
@@ -43,7 +46,7 @@ const Home = () => {
     const hashtags = content.match(/(?<=#)\w+/g);
 
     const payload = {
-      title, content, hashtags
+      title, currentFullName, currentUsername ,content, hashtags
     }
 
     try {
@@ -128,7 +131,8 @@ const Home = () => {
           : null }
 
       <div className="leftSideContainer">
-        <h1>{currentUser}</h1>
+        <h1>{currentFullName}</h1>
+        <p>{currentUsername}</p>
       </div>
 
      <div className="mainContainer">
@@ -143,7 +147,9 @@ const Home = () => {
             {posts.map((post, index) => {
               return (
                 <div className="post" key={post._id}>
-                  <h1>{post.title}</h1>
+                  <h1>{post.fullName}</h1>
+                  <p>{post.username}</p>
+                  <h2>{post.title}</h2>
                   <p>
                     {post.content}
                   </p>

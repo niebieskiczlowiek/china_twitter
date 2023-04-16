@@ -11,6 +11,15 @@
     position: relative;
     left: 0;
     top: 0;
+
+    .post{
+      background: rgb(240, 224, 224);
+      margin: 0 auto;
+      width: 20%;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
   }
 
   .rightSideContainer {
