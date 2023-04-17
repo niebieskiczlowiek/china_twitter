@@ -15,10 +15,29 @@
     .post{
       background: rgb(240, 224, 224);
       margin: 0 auto;
-      width: 20%;
+      margin-top: 30px;
+      width: 50%;
       padding: 10px;
       border-radius: 10px;
       margin-bottom: 10px;
+
+      .userHeader{
+        display: flex;
+        font-size: 20px;
+
+        .fullName {
+          font-weight: bold;
+          margin-right: 10px;
+        }
+
+        .username{
+          color: gray;
+        }
+      }
+      
+      .contents{
+        text-align: left;
+      }
     }
   }
 

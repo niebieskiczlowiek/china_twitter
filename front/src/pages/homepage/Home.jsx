@@ -7,7 +7,6 @@ import axios from "axios";
 
 const Home = () => {
   const [postWriter, setPostWriter] = React.useState(false);
-  const [title, setTitle] = React.useState('');
   const [content, setContent] = React.useState('');
   const [posts, setPosts] = React.useState([]);
   const [popularHashtags, setPopularHashtags] = React.useState([]);
@@ -46,7 +45,7 @@ const Home = () => {
     const hashtags = content.match(/(?<=#)\w+/g);
 
     const payload = {
-      title, currentFullName, currentUsername ,content, hashtags
+      currentFullName, currentUsername ,content, hashtags
     }
 
     try {
@@ -54,7 +53,6 @@ const Home = () => {
       const response2 = await axios.post("/api/hashtags/post", hashtags )
 
       if (response.data.success && response2.data.success) {
-        setTitle("");
         setContent("");
         getPosts();
         getPopularHashtags();
@@ -86,10 +84,6 @@ const Home = () => {
     setPostWriter(!postWriter);
   }
 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value); 
-  }
-
   const handleContentChange = (e) => {
     setContent(e.target.value);
   }
@@ -108,13 +102,6 @@ const Home = () => {
        {postWriter
         ?  ( <div className="postWriter">
             <form className="form">
-              <input 
-                type="text" 
-                placeholder="Title" 
-                value = {title}
-                onChange = {handleTitleChange}
-              />
-
               <textarea
                 type="text" 
                 placeholder="Content"
@@ -147,13 +134,15 @@ const Home = () => {
             {posts.map((post, index) => {
               return (
                 <div className="post" key={post._id}>
-                  <h1>{post.fullName}</h1>
-                  <p>{post.username}</p>
-                  <h2>{post.title}</h2>
-                  <p>
-                    {post.content}
-                  </p>
-                  <a>{post.hashtag}</a>
+                  <div className="userHeader">
+                    <p className="fullName">{post.fullName}</p>
+                    <p className="username">@{post.username}</p>
+                  </div>
+                  <div className="contents">
+                    <p>
+                      {post.content}
+                    </p>
+                  </div>
                 </div>
               )
             })}

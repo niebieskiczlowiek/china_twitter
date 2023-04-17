@@ -7,7 +7,6 @@ const add_post = async (req, res) => {
     console.log(data, "<<< data")
 
     const post = {
-        title : data.title,
         fullName : data.currentFullName,
         username : data.currentUsername,
         hashtags: data.hashtags,
