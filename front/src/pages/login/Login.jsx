@@ -21,16 +21,8 @@ const Login = () => {
 
         const response = await axios.post('/api/login', data)
 
-        const sessionData = {
-            token: response.data.token,
-            username: response.data.username,
-            fullName: response.data.fullName
-        }
-
         if (response.data.success) {
-            sessionStorage.setItem("token", sessionData.token)
-            sessionStorage.setItem("username", sessionData.username)
-            sessionStorage.setItem("fullName", sessionData.fullName)
+            sessionStorage.setItem('token', response.data.token);
             navigate('/home');
         }
     };
@@ -40,13 +32,6 @@ const Login = () => {
             <div className="loginContainer">
                 <h1 className="header">Sign in</h1>
                 <div className="links">
-                    <button
-                        onClick={() => {
-                        navigate("/login");
-                        }}
-                    >
-                        Sign in
-                    </button>
                     <button
                         onClick={() => {
                         navigate("/register");

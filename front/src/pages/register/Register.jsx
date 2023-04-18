@@ -42,13 +42,6 @@ const Register = () => {
           >
             Sign in
           </button>
-          <button
-            onClick={() => {
-              navigate("/register");
-            }}
-          >
-            Sign up
-          </button>
         </div>
         <div className="form">
           <form>
