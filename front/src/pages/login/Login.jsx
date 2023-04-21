@@ -44,13 +44,6 @@ const Login = () => {
                 <div className="links">
                     <button
                         onClick={() => {
-                        navigate("/login");
-                        }}
-                    >
-                        Sign in
-                    </button>
-                    <button
-                        onClick={() => {
                         navigate("/register");
                         }}
                     >
