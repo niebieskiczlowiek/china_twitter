@@ -24,13 +24,15 @@ const Login = () => {
         const sessionData = {
             token: response.data.token,
             username: response.data.username,
-            fullName: response.data.fullName
+            fullName: response.data.fullName,
+            email: response.data.email
         }
 
         if (response.data.success) {
             sessionStorage.setItem("token", sessionData.token)
             sessionStorage.setItem("username", sessionData.username)
             sessionStorage.setItem("fullName", sessionData.fullName)
+            sessionStorage.setItem("email", sessionData.email)
             navigate('/home');
         }
     };

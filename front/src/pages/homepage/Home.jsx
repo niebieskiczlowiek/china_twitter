@@ -12,6 +12,7 @@ const Home = () => {
   const [popularHashtags, setPopularHashtags] = React.useState([]);
   const [currentUsername, setCurrentUsername] = React.useState('');
   const [currentFullName, setCurrentFullName] = React.useState('');
+  const [currentEmail, setCurrentEmail] = React.useState('');
   const navigate = useNavigate();
 
   function checkLogin() {
@@ -20,9 +21,12 @@ const Home = () => {
       navigate('/home');
       const username = sessionStorage.getItem("username")
       const fullName = sessionStorage.getItem("fullName")
+      const email = sessionStorage.getItem("email")
       console.log(username, fullName)
       setCurrentUsername(username)
       setCurrentFullName(fullName)
+      setCurrentEmail(email)
+
     } else {
       navigate('/');
     }
@@ -75,6 +79,22 @@ const Home = () => {
       console.log(error);
     }
   };
+
+  const handleLike = async (postId) => {
+    const payload = {
+      postId,
+      currentEmail
+    }
+
+    try {
+      const response = await axios.post('/api/posts/update_likes', payload)
+      if (response.data.success) {
+        getPosts();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const hashtagFilter = async (e) => {
     console.log(e.target.innerText);
@@ -142,6 +162,23 @@ const Home = () => {
                     <p>
                       {post.content}
                     </p>
+                  </div>
+                  <div className="bottomBar">
+                  
+                  { ( post.likedBy.includes(currentEmail) ) 
+                    ? (<button
+                        className="likeButton-liked"
+                        onClick = {() => handleLike(post._id)}
+                      >
+                        Like
+                      </button> )
+                    : ( <button
+                        className="likeButton-unliked"
+                        onClick = {() => handleLike(post._id)}
+                      >
+                        Like
+                      </button> )}
+
                   </div>
                 </div>
               )
