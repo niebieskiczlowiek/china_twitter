@@ -16,13 +16,14 @@ const login = async (req, res) => {
         }
         const username = user.username;
         const fullName = user.fullName;
+        const email = user.email;
 
         console.log(username, fullName)
 
         if (data.password === user.password) {
             const token = jwt.sign({ email: userInfo.email }, "token", { expiresIn: "1h" });
             
-            return res.status(200).json({ success: true, token, username, fullName});
+            return res.status(200).json({ success: true, token, username, fullName, email});
         } else {
             return res.status(200).json({ success: false });
         } 
