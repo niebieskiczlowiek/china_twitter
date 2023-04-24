@@ -30,7 +30,7 @@ const Adduser = async (req, res) => {
       subject: 'Potwierdzenie rejestracji',
       text: `Witaj ${data.username}! Dziękujemy za rejestrację w naszym serwisie. Aby potwierdzić rejestrację kliknij w poniższy link: http://localhost:3000/confirm/${token}`,
     };
-    
+
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.log(error);
