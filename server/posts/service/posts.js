@@ -4,8 +4,6 @@ const jwt = require("jsonwebtoken")
 const add_post = async (req, res) => {
     const data = req.body;
 
-    console.log(data, "<<< data")
-
     const post = {
         fullName : data.currentFullName,
         username : data.currentUsername,
@@ -16,8 +14,6 @@ const add_post = async (req, res) => {
         likedBy : [],
 
     }
-
-    console.log(post, "<<< post")
     
      try {
         await Post.create(post);

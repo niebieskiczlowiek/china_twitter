@@ -45,8 +45,24 @@ const Home = () => {
     }
   };
 
+  const updateHashtags = async () => {
+    try {
+      const response = await axios.get('/api/hashtags/update_hashtags')
+
+      if (response.data.success) {
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const handleSubmit = async () => {
-    const hashtags = content.match(/(?<=#)\w+/g);
+    let hashtags = content.match(/(?<=#)\w+/g);
+
+    if (!hashtags) {
+      hashtags = [];
+    }
 
     const payload = {
       currentFullName, currentUsername ,content, hashtags
@@ -54,12 +70,13 @@ const Home = () => {
 
     try {
       const response = await axios.post("/api/posts/add", payload)
-      const response2 = await axios.post("/api/hashtags/post", hashtags )
 
-      if (response.data.success && response2.data.success) {
+      if (response.data.success) {
+        getPopularHashtags();
         setContent("");
         getPosts();
-        getPopularHashtags();
+        updateHashtags();
+
       }
 
     } catch (error) {
