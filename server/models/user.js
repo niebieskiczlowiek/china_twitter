@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const Joi = require("joi");
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -23,6 +25,12 @@ const userSchema = new mongoose.Schema({
     default: false,
   }
 });
+
+userSchema.statics.create = async function (userData) {
+  const user = new this(userData);
+  await user.save();
+  return user;
+};
 
 const User = mongoose.model('users', userSchema);
 

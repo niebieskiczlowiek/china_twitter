@@ -1,0 +1,158 @@
+.home {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 80px;
+    }
+    
+    .homeContainer {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    }
+    
+    .homeLeft {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-right: 20px;
+    }
+    
+    .postWriter {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    }
+    
+    .postWriter textarea {
+    border: none;
+    resize: none;
+    height: 80px;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 1.2rem;
+    font-family: inherit;
+    border-radius: 5px;
+    }
+    
+    .postWriter button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    }
+    
+    .postWriter button:hover {
+    background-color: #0069d9;
+    }
+    
+    .post {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    }
+    
+    .postTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    }
+    
+    .postTopLeft {
+    display: flex;
+    align-items: center;
+    }
+    
+    .postTopLeft .postProfileImg {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+    }
+    
+    .postTopLeft .postUsername {
+    font-weight: bold;
+    }
+    
+    .postTopLeft .postDate {
+    color: #777;
+    margin-left: 10px;
+    }
+    
+    .postTopRight .postTopRightIcon {
+    font-size: 1.5rem;
+    color: #777;
+    }
+    
+    .postCenter {
+    margin-bottom: 10px;
+    }
+    
+    .postCenter .postText {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    }
+    
+    .postCenter .postImg {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 5px;
+    }
+    
+    .postBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+    
+    .postBottomLeft {
+    display: flex;
+    align-items: center;
+    }
+    
+    .postBottomLeft .postBottomIcon {
+    font-size: 1.5rem;
+    color: #777;
+    margin-right: 10px;
+    }
+    
+    .postBottomRight .postBottomIcon {
+    font-size: 1.5rem;
+    color: #777;
+    }
+    
+    .homeRight {
+    flex-basis: 300px;
+    margin-left: 20px;
+    }
+    
+    .homeRightContainer {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    }
+    
+    .homeInfo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    }
