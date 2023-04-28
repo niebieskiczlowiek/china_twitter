@@ -9,7 +9,7 @@ module.exports = function(app) {
       '/api/posts/add',
       '/api/posts/get',
       '/api/posts/get_tags',
-      '/api/hashtags/post',
+      '/api/hashtags/update_hashtags',
       '/api/hashtags/get_popular',
       '/api/posts/update_likes',
     ],

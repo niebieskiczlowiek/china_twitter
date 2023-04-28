@@ -18,8 +18,6 @@ const login = async (req, res) => {
         const fullName = user.fullName;
         const email = user.email;
 
-        console.log(username, fullName)
-
         if (data.password === user.password) {
             const token = jwt.sign({ email: userInfo.email }, "token", { expiresIn: "1h" });
             
