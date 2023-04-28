@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Joi = require("joi");
+const { verify } = require('jsonwebtoken');
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -21,6 +22,10 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   admin: {
+    type: Boolean,
+    default: false,
+  },
+  verify: {
     type: Boolean,
     default: false,
   }

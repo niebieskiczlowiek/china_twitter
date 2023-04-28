@@ -75,7 +75,7 @@ const Profile = () => {
     };
     
     useEffect(() => {
-        // checkLogin();
+        checkLogin();
         getPosts();
         getPopularHashtags();
     }, []);

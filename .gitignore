@@ -6,6 +6,7 @@
 # Node artifact files
 node_modules/
 dist/
+    
 
 # Compiled Java class files
 *.class
@@ -71,3 +72,4 @@ front/.env.production.local
 front/npm-debug.log*
 front/yarn-debug.log*
 front/yarn-error.log*
+server/register/service/passowrd.json
