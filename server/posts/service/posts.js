@@ -12,6 +12,7 @@ const add_post = async (req, res) => {
         date : Date.now(),
         likes : 0,
         likedBy : [],
+        comments : {},
 
     }
     
@@ -61,7 +62,7 @@ const update_like_count = async (req, res) => {
         console.log(error)
         return res.status(500).json({ success: false });
     }
-}
+};
 
 module.exports = {
     add_post,

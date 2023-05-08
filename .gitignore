@@ -73,3 +73,4 @@ front/npm-debug.log*
 front/yarn-debug.log*
 front/yarn-error.log*
 server/register/service/passowrd.json
+server/register/service/passwd.json

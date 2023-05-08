@@ -8,6 +8,7 @@ const registerApi = require("./server/register");
 const checkApi = require("./server/check");
 const postApi = require("./server/posts");
 const hashtagApi = require("./server/hashtags")
+const commentApi = require("./server/comments")
 
 app.use('/', express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -18,6 +19,7 @@ app.use(loginApi);
 app.use(postApi); 
 app.use(hashtagApi);
 app.use(registerApi);
+app.use(commentApi)
 
 const db = 'mongodb+srv://Admin:gCLe2OnO9gbcL8wF@twitter.6jwx7au.mongodb.net/twitter';
 

@@ -29,6 +29,10 @@ const postSchema = new mongoose.Schema({
     type: Array,
     required: false,
   },
+  comments: {
+    type: Object,
+    required: false,
+  },
 });
 
 const Post = mongoose.model('posts', postSchema);

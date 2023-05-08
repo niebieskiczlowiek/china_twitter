@@ -107,4 +107,21 @@
       flex-direction: column;
     }
   }
+
+  .commentWriter {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin: 0 auto;
+    background:rgb(240, 224, 224);
+  
+    position: fixed;
+    left: 0;
+    bottom: 100px;
+  
+    .form {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }

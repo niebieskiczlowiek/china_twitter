@@ -1,7 +1,7 @@
 const User = require('../../models/user');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
-const password = require('./passowrd.json');
+const password = require('./passwd.json');
 
 const Adduser = async (req, res) => {
   const data = req.body;
@@ -25,7 +25,8 @@ const Adduser = async (req, res) => {
       host: 'smtp.gmail.com',
       port: 587,
       auth: {
-        user: 'u17_oliber_waw@technischools.com',
+        // user: 'u17_oliber_waw@technischools.com',
+        user: 'u19_adaczy_waw@technischools.com',
         pass: password.password,
       }
     });

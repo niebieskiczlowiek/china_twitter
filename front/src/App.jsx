@@ -13,6 +13,7 @@ function App() {
           <Route path="Register" element={<Register />} />
           <Route path="Check" element={<Check />} />
           <Route path="Profile" element={<Profile />} />
+          {/* <Route path="confirm/:token/:id" element={<Confirm />} /> */}
         </Routes>
       </BrowserRouter>
     </div>

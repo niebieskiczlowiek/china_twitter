@@ -7,7 +7,9 @@ import axios from "axios";
 
 const Home = () => {
   const [postWriter, setPostWriter] = React.useState(false);
+  const [commentWriter, setCommentWriter] = React.useState(false);
   const [content, setContent] = React.useState('');
+  const [comment, setComment] = React.useState('');
   const [posts, setPosts] = React.useState([]);
   const [popularHashtags, setPopularHashtags] = React.useState([]);
   const [currentUsername, setCurrentUsername] = React.useState('');
@@ -84,6 +86,17 @@ const Home = () => {
     }
   };
 
+  const handleCommentSubmit = async (postId) => {
+    console.log("works!!!!");
+    console.log(postId, "post id")
+    const response = await axios.post('/api/comments/add', { comment, currentEmail, postId })
+
+    if (response.data.success) {
+      setComment('');
+      getPosts();
+    }
+  };
+
   const getPopularHashtags = async () => {
     try {
       const response = await axios.get('/api/hashtags/get_popular')
@@ -98,6 +111,7 @@ const Home = () => {
   };
 
   const handleLike = async (postId) => {
+    console.log(postId, "like post id")
     const payload = {
       postId,
       currentEmail
@@ -121,10 +135,17 @@ const Home = () => {
     setPostWriter(!postWriter);
   }
 
+  const handleCommentWriter = () => {
+    setCommentWriter(!commentWriter);
+  }
+
   const handleContentChange = (e) => {
     setContent(e.target.value);
   }
 
+  const handleCommentChange = (e) => {
+    setComment(e.target.value);
+  }
 
   useEffect(() => {
     checkLogin();
@@ -194,8 +215,43 @@ const Home = () => {
                         onClick = {() => handleLike(post._id)}
                       >
                         Like
-                      </button> )}
+                      </button> ) }
 
+                      <button
+                        className="commentButton"
+                        onClick = { handleCommentWriter }
+                      >
+                        Comments 
+                      </button>
+
+                      {commentWriter
+                        ? (
+                          <div className="commentWriter">
+                            <form className="form">
+                              <textarea
+                                type="text"
+                                placeholder="Comment"
+                                value={comment}
+                                onChange={handleCommentChange}
+                              />
+
+                            </form>
+
+                            <button type="submit"
+                              onClick={
+                                () => {
+                                  handleCommentSubmit(post._id)
+                                }
+                              }
+                            >
+                              Submit
+                            </button>
+                          </div>
+                        )
+                        : null 
+                      }
+
+                     
                   </div>
                 </div>
               )
