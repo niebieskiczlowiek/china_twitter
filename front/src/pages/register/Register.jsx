@@ -22,12 +22,13 @@ const Register = () => {
     };
 
     const response = await axios.post("/api/register", data);
-
+    
     if (response.data.success) {
       sessionStorage.setItem("token", response.data.token);
       navigate("/home");
     }
   };
+
 
 
   return (
