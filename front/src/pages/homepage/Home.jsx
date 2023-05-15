@@ -87,9 +87,9 @@ const Home = () => {
   };
 
   const handleCommentSubmit = async (postId) => {
-    console.log("works!!!!");
-    console.log(postId, "post id")
-    const response = await axios.post('/api/comments/add', { comment, currentEmail, postId })
+    console.log(postId, "comment post id")
+    const author = [currentFullName, currentUsername]
+    const response = await axios.post('/api/comments/add', { comment, author, currentEmail, postId })
 
     if (response.data.success) {
       setComment('');
@@ -127,17 +127,15 @@ const Home = () => {
     }
   }
 
+  const viewPost = (postId) => {
+    console.log(postId, "view post id")
+
+    navigate(`/post/${postId}`);
+  }
+
   const hashtagFilter = async (e) => {
     console.log(e.target.innerText);
   };
-
-  const handlePostWriter = () => {
-    setPostWriter(!postWriter);
-  }
-
-  const handleCommentWriter = () => {
-    setCommentWriter(!commentWriter);
-  }
 
   const handleContentChange = (e) => {
     setContent(e.target.value);
@@ -157,6 +155,8 @@ const Home = () => {
 
   return ( 
     <div className="home">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
        {postWriter
         ?  ( <div className="postWriter">
             <form className="form">
@@ -164,9 +164,9 @@ const Home = () => {
                 type="text" 
                 placeholder="Content"
                 value = {content}
-                onChange = {handleContentChange}  
+                onChange = {handleContentChange} 
               />
-            </form>
+            </form> 
 
             <button type="submit"
               onClick = {handleSubmit}
@@ -176,18 +176,24 @@ const Home = () => {
           : null }
 
       <div className="leftSideContainer">
-        <h1>{currentFullName}</h1>
-        <p>{currentUsername}</p>
-      </div>
-
-     <div className="mainContainer">
-      <h1>Home</h1>
+        <h1
+          onClick={navigate('/home')}
+        >Home</h1>
         <button
-          onClick = {handlePostWriter}
+          onClick = { () => {setPostWriter(!postWriter)}}
+          className = "tweetButton"
         >
           Create Post
         </button>
 
+        <div className="userInfo">
+          <h1>{currentFullName}</h1> 
+          <p>@{currentUsername}</p>
+        </div>
+
+      </div>
+
+     <div className="mainContainer">
           <div className="posts">
             {posts.map((post, index) => {
               return (
@@ -196,33 +202,48 @@ const Home = () => {
                     <p className="fullName">{post.fullName}</p>
                     <p className="username">@{post.username}</p>
                   </div>
-                  <div className="contents">
-                    <p>
+
+                  <div className="contents"
+                    onClick = { () => {viewPost(post._id)}}
+                  >
+                    <p className="content">
                       {post.content}
                     </p>
                   </div>
+
                   <div className="bottomBar">
                   
                   { ( post.likedBy.includes(currentEmail) ) 
-                    ? (<button
-                        className="likeButton-liked"
-                        onClick = {() => handleLike(post._id)}
-                      >
-                        Like
-                      </button> )
-                    : ( <button
-                        className="likeButton-unliked"
-                        onClick = {() => handleLike(post._id)}
-                      >
-                        Like
-                      </button> ) }
+                    ? (
+                        <div className="heartContainer">
+                          <span
+                            className="material-symbols-outlined"
+                            // liked
+                            onClick = {() => handleLike(post._id)}
+                          >
+                            favorite
+                          </span>
+                        </div>
+                     )
+                    : ( 
+                      <div className="unlikedContainer">
+                        <span
+                          className="material-symbols-outlined"
+                          // unliked
+                          onClick = {() => handleLike(post._id)}
+                        >
+                          favorite
+                        </span>
+                      </div>
+                     ) }
 
-                      <button
-                        className="commentButton"
-                        onClick = { handleCommentWriter }
-                      >
-                        Comments 
-                      </button>
+
+                      <span
+                        className="material-symbols-outlined"
+                        onClick = { () => {setCommentWriter(!commentWriter)}}
+                      > 
+                        mode_comment
+                      </span>
 
                       {commentWriter
                         ? (

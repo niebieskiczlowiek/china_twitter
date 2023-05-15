@@ -7,6 +7,7 @@ const add_comment = async (req, res) => {
 
     const comment = {
         email: data.currentEmail,
+        author: data.author,
         comment: data.comment,
         postId: data.postId,
     }
@@ -21,6 +22,29 @@ const add_comment = async (req, res) => {
     }
 }
 
+const get_comments = async (req, res) => {
+    const data = req.body;
+    let postId = data.postId;
+
+    console.log(postId)
+
+    try {
+        // const comments = await Comment.find({ postId: postId });
+        const comments = await Comment.find({
+            postId: postId
+        });
+
+        console.log(comments)
+
+        return res.status(200).json({ success: true, comments: comments });
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ success: false });
+
+    }
+}
+
 module.exports = {
     add_comment,
+    get_comments,
 };
