@@ -8,6 +8,7 @@ import moment from "moment";
 
 const Home = () => {
   const { id } = useParams();
+  const [postLiked, setPostLiked] = React.useState(false);
   const [currentDate, setCurrentDate] = React.useState('');
   const [currentPost, setCurrentPost] = React.useState({});
   const [comments, setComments] = React.useState([]);
@@ -25,8 +26,7 @@ const Home = () => {
       const email = sessionStorage.getItem("email")
       setCurrentUsername(username)
       setCurrentFullName(fullName)
-      setCurrentEmail(email)
-
+      setCurrentEmail(email) 
     } else {
       navigate('/');
     }
@@ -41,12 +41,19 @@ const Home = () => {
       if (response.data.success) {
         const post = response.data.post
         setCurrentPost(post);
-        console.log(currentPost, "current post2")
-        console.log(typeof post, "post")
+        console.log(currentPost)
 
         let date = post.date
         date = moment(date).format('h:mm a - MMMM Do YYYY')
         setCurrentDate(date)
+
+        if (post.likedBy.includes(currentEmail)) {
+          setPostLiked(true);
+          console.log("TRUE")
+        } else {
+          setPostLiked(false);
+          console.log("FALSE")
+        }
       }
     } catch(error) {
         console.log(error)
@@ -59,6 +66,8 @@ const Home = () => {
       const response = await axios.post('/api/comments/get', { postId });
 
       if (response.data.success) {
+        const comments = response.data.comments;
+        setComments(comments);
       }
     } catch (error) {
       console.log(error);
@@ -103,8 +112,6 @@ const Home = () => {
     getPopularHashtags();
     checkLogin();
     getPost();
-    // console.log(currentPost.likedBy.includes(currentEmail), "liked by")
-    console.log(currentPost, "current post")
   }, []);
 
 
@@ -144,7 +151,7 @@ const Home = () => {
           </div>
 
           <div className="bottomBar">
-              {/* { ( currentPost.likedBy.includes(currentEmail) ) 
+              { ( postLiked ) 
                 ? (
                     <div className="heartContainer">
                       <span
@@ -166,7 +173,14 @@ const Home = () => {
                       favorite
                     </span>
                   </div>
-                )} */}
+                )}
+
+                <span
+                  className="material-symbols-outlined"
+                  // onClick = { () => handleCommentWriter(post._id) }
+                > 
+                  mode_comment
+                </span>
           </div>
 
 
@@ -178,9 +192,9 @@ const Home = () => {
                       <p className="fullName">{comment.author[0]}</p>
                       <p className="username">@{comment.author[1]}</p>
                     </div>
-
-
-                    <p>{comment.comment}</p>
+                    <div className="commentContents">
+                      <p>{comment.comment}</p>
+                    </div>
                   </div>
                 )}
               )}

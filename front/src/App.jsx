@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter, Path, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Login, Register, Home, Check, Profile, Post } from "./pages";
 
 function App() {
@@ -8,8 +8,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="home" element={<Home />} />
           <Route path="/" element={<Login />} />
+          <Route path="home" element={<Home />} />
           <Route path="register" element={<Register />} />
           <Route path="check" element={<Check />} />
           <Route path="profile" element={<Profile />} />

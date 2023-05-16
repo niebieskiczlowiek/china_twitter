@@ -11,6 +11,7 @@ const Home = () => {
   const [content, setContent] = React.useState('');
   const [comment, setComment] = React.useState('');
   const [posts, setPosts] = React.useState([]);
+  const [currentPostId , setCurrentPostId] = React.useState('');
   const [popularHashtags, setPopularHashtags] = React.useState([]);
   const [currentUsername, setCurrentUsername] = React.useState('');
   const [currentFullName, setCurrentFullName] = React.useState('');
@@ -20,7 +21,6 @@ const Home = () => {
   function checkLogin() {
     const isLoggedIn = sessionStorage.getItem("token")
     if (isLoggedIn) {
-      navigate('/home');
       const username = sessionStorage.getItem("username")
       const fullName = sessionStorage.getItem("fullName")
       const email = sessionStorage.getItem("email")
@@ -86,9 +86,9 @@ const Home = () => {
     }
   };
 
-  const handleCommentSubmit = async (postId) => {
-    console.log(postId, "comment post id")
+  const handleCommentSubmit = async () => {
     const author = [currentFullName, currentUsername]
+    const postId = currentPostId;
     const response = await axios.post('/api/comments/add', { comment, author, currentEmail, postId })
 
     if (response.data.success) {
@@ -137,6 +137,15 @@ const Home = () => {
     console.log(e.target.innerText);
   };
 
+  const handlePostWriter = () => {
+    setPostWriter(!postWriter);
+  }
+
+  const handleCommentWriter = (postId) => {
+    setCurrentPostId(postId);
+    setCommentWriter(!commentWriter);
+  }
+
   const handleContentChange = (e) => {
     setContent(e.target.value);
   }
@@ -164,7 +173,7 @@ const Home = () => {
                 type="text" 
                 placeholder="Content"
                 value = {content}
-                onChange = {handleContentChange} 
+                onChange = {handleContentChange}  
               />
             </form> 
 
@@ -180,7 +189,7 @@ const Home = () => {
           onClick={navigate('/home')}
         >Home</h1>
         <button
-          onClick = { () => {setPostWriter(!postWriter)}}
+          onClick = {handlePostWriter}
           className = "tweetButton"
         >
           Create Post
@@ -204,7 +213,7 @@ const Home = () => {
                   </div>
 
                   <div className="contents"
-                    onClick = { () => {viewPost(post._id)}}
+                    onClick = { () => viewPost(post._id) }
                   >
                     <p className="content">
                       {post.content}
@@ -240,7 +249,7 @@ const Home = () => {
 
                       <span
                         className="material-symbols-outlined"
-                        onClick = { () => {setCommentWriter(!commentWriter)}}
+                        onClick = { () => handleCommentWriter(post._id) }
                       > 
                         mode_comment
                       </span>
@@ -257,11 +266,10 @@ const Home = () => {
                               />
 
                             </form>
-
                             <button type="submit"
                               onClick={
                                 () => {
-                                  handleCommentSubmit(post._id)
+                                  handleCommentSubmit()
                                 }
                               }
                             >
