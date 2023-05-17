@@ -32,7 +32,7 @@ const Home = () => {
     }
   }
 
-  const getPost = async() => {
+  const getPost = async () => {
     const postId = id;
 
     try {
@@ -41,24 +41,37 @@ const Home = () => {
       if (response.data.success) {
         const post = response.data.post
         setCurrentPost(post);
-        console.log(currentPost)
-
-        let date = post.date
-        date = moment(date).format('h:mm a - MMMM Do YYYY')
-        setCurrentDate(date)
-
-        if (post.likedBy.includes(currentEmail)) {
-          setPostLiked(true);
-          console.log("TRUE")
-        } else {
-          setPostLiked(false);
-          console.log("FALSE")
-        }
       }
     } catch(error) {
         console.log(error)
     }
   }
+
+  const processDate = async () => {
+    let date = currentPost.date
+    date = moment(date).format('h:mm a - MMMM Do YYYY')
+    setCurrentDate(date)
+  }
+
+  const checkIfLiked = async () => {
+    const postId = id;
+    const email = sessionStorage.getItem("email")
+    console.log(postId, "POST ID AND EMAIL")
+    console.log(email, "EMAIL")
+
+    try {
+      const response = await axios.post('/api/posts/check_if_liked', { postId, email })
+
+      if (response.data.success) {
+        const liked = response.data.likeStatus
+        console.log(liked, "LIKED STATUS")
+        setPostLiked(liked);
+      }
+    } catch(error) {
+        console.log(error)
+    }
+  }
+
 
   const getAllComments = async () => {
     const postId = id;
@@ -83,7 +96,9 @@ const Home = () => {
     try {
       const response = await axios.post('/api/posts/update_likes', payload)
       if (response.data.success) {
-        getPost();
+        const likeStatus = response.data.likeStatus;
+        console.log(likeStatus, "LIKE STATUS")
+        setPostLiked(likeStatus);
       }
     } catch (error) {
       console.log(error);
@@ -108,10 +123,12 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getAllComments();
-    getPopularHashtags();
     checkLogin();
     getPost();
+    getAllComments();
+    getPopularHashtags();
+    processDate();
+    checkIfLiked();
   }, []);
 
 

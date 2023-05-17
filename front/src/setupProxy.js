@@ -15,6 +15,7 @@ module.exports = function(app) {
       '/api/comments/add',
       '/api/comments/get',
       '/api/posts/get_single',
+      '/api/posts/check_if_liked',
     ],
     createProxyMiddleware({
       target: 'http://localhost:8080',

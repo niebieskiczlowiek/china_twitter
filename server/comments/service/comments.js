@@ -26,15 +26,12 @@ const get_comments = async (req, res) => {
     const data = req.body;
     let postId = data.postId;
 
-    console.log(postId)
-
     try {
         // const comments = await Comment.find({ postId: postId });
         const comments = await Comment.find({
             postId: postId
         });
 
-        console.log(comments)
 
         return res.status(200).json({ success: true, comments: comments });
     } catch (error) {
