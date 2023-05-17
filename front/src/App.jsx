@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Login, Register, Home, Check, Profile, Post } from "./pages";
+import { BrowserRouter, Path, Routes, Route } from "react-router-dom";
+import { Login, Register, Home, Check, Profile, Verify, Post} from "./pages";
 
 function App() {
   return (
@@ -9,6 +9,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="Register" element={<Register />} />
+          <Route path="Check" element={<Check />} />
+          <Route path="Profile" element={<Profile />} />
+          <Route path="/confirm/:token" element={<Verify />} />
           <Route path="home" element={<Home />} />
           <Route path="register" element={<Register />} />
           <Route path="check" element={<Check />} />
