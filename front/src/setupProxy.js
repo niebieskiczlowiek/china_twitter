@@ -12,7 +12,9 @@ module.exports = function(app) {
       '/api/hashtags/update_hashtags',
       '/api/hashtags/get_popular',
       '/api/posts/update_likes',
-      '/api/comments/add'
+      '/api/comments/add',
+      '/api/verify',
+
     ],
     createProxyMiddleware({
       target: 'http://localhost:8080',

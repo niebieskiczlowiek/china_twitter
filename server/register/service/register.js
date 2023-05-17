@@ -36,7 +36,7 @@ const Adduser = async (req, res) => {
       from: '',
       to: data.email,
       subject: 'Potwierdzenie rejestracji',
-      text: `Witaj ${data.username}! Dziękujemy za -rejestrację w naszym serwisie. Aby potwierdzić rejestrację kliknij w poniższy link: http://localhost:3000/confirm/${token}/${newUser.verified}`,
+      text: `Witaj ${data.username}! Dziękujemy za -rejestrację w naszym serwisie. Aby potwierdzić rejestrację kliknij w poniższy link: http://localhost:3000/confirm/${token}/`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -60,14 +60,12 @@ const ConfirmUser = async (req, res) => {
   try {
     const decoded = jwt.verify(token, 'my_secret_key');
 
-    // Pobieramy użytkownika z bazy danych
     const user = await User.findById(decoded.id);
 
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
 
-    // Ustawiamy wartość pola "verified" na true
     user.verified = verified === 'true';
     await user.save();
 
@@ -77,6 +75,7 @@ const ConfirmUser = async (req, res) => {
   return res.status(500).json({ success: false, message: 'Server error' });
   }
   };
+
   
   module.exports = {
   Adduser,
