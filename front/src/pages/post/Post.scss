@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  height: 0px;
 
   .leftSideContainer{
     display: flex;
@@ -63,82 +62,120 @@
     display: flex;
     flex-direction: column;
     width: 60%;
-    height: 100vh;
     margin: 0 auto;
     position: relative;
     left: 0;
     top: 0;
 
-    background: rgb(242, 236, 236);
+    .post {
+      margin: 20px;
+      padding: 40px;
 
-    .posts {
-      .post{
-        background: rgb(255, 255, 255);
-        margin: 0 auto;
-        margin-top: 30px;
-        width: 50%;
+      .postHeader{
+        display: flex;
+        flex-direction:column;
+        align-items: flex-start;
+        margin-top: 20px;
+        margin-bottom: 20px;
 
-        border-radius: 10px;
-        margin-bottom: 10px;
-  
-        .userHeader{
-          display: flex;
-          font-size: 19px;
-  
-          .fullName {
-            font-weight: bold;
-            margin-right: 10px;
-          }
-  
-          .username{
-            color: gray;
-          }
+        p {
+          font-size: 20px;
+          font-weight:bold;
+          margin: 0;
         }
-        
-        .contents{
-          border-radius: 10px;
+        a {
+          color: gray;
+          align-self:center;
+          font-size: 15px;
+          margin: 2px;
+          align-self:flex-start;
+        }
+      }
+
+      .contents{
+        .content{
+          margin: 10px;
           padding: 10px;
-          .content {
-            font-size: 15px;
-          }
-  
+          border: 1px solid #e6e6e6;
+          border-radius: 10px;
+          text-align: left;
+        }
+
+        .date {
+          color: gray;
+          font-size: 15px;
+          margin: 2px;
+          text-align: left;
+          
+          
+        }
+      }
+
+      .bottomBar{
+        display: flex;
+        margin-top: 10px;
+
+        .material-symbols-outlined {
+          user-select: none;
+          scale: 1.2;
+          color:#e6e6e6;
+          margin: 5px;
+
           &:hover {
-            background-color: #f5f5f5;
+            color:rgb(230, 204, 204)
           }
         }
-  
-        .bottomBar{
-          display: flex;
 
+        .heartContainer {
           .material-symbols-outlined {
-            user-select: none;
-            scale: 1.2;
+            color: rgb(202, 88, 88);
+          }
+        }
+
+        .unlikedContainer {
+          .material-symbols-outlined {
             color:#e6e6e6;
-            margin: 5px;
 
             &:hover {
               color:rgb(230, 204, 204)
             }
           }
+        }
 
-          .heartContainer {
-            .material-symbols-outlined {
-              color: rgb(202, 88, 88);
+      }
+
+      .comments{
+        padding-top: 10px;
+        margin-top: 20px;
+        border-top: 1px solid #e6e6e6;
+        .comment {
+          margin: 10px;
+          padding: 10px;
+          border: 1px solid #e6e6e6;
+          border-radius: 10px;
+          
+          text-align: left;
+
+          .commentHeader {
+            display: flex;
+            .fullName {
+              font-weight:bold;
+              
+            }
+            .username { 
+              font-weight: 300;
+              margin-left: 5px;
+              color: gray;
             }
           }
 
-          .unlikedContainer {
-            .material-symbols-outlined {
-              color:#e6e6e6;
-
-              &:hover {
-                color:rgb(230, 204, 204)
-              }
-            }
+          .commentContents{
+            margin-left: 20px;
+            font-size: 15px;
           }
-
         }
       }
+
     }
   }
 
@@ -146,17 +183,10 @@
     display: flex;
     flex-direction: column;
     width: 20%;
-    height: 100vh;
     margin: 0 auto;
     position: fixed;
     right: 0;
     top: 0;
-    border-left: 1px solid #e6e6e6;
-
-    h1 {
-      font-size: 20px;
-      margin-top: 10px;
-    }
 
     .hashtags{
       .hashtag {
@@ -184,7 +214,7 @@
     margin: 0 auto;
   
     position: fixed;
-    z-index: 1;
+    left: 0;
     top: 0;
   
     .form {

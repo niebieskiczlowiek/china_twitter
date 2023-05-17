@@ -13,7 +13,6 @@ const Login = () => {
         e.preventDefault();
 
         const data = {
-            
             email: emailRef.current.value,
             password: passwordRef.current.value
 
@@ -43,10 +42,7 @@ const Login = () => {
                 <h1 className="header">Sign in</h1>
                 <div className="links">
                     <button
-                        onClick={() => {
-                        navigate("/register");
-                        }}
-                    >
+                        onClick={() => navigate("/register")}>
                         Sign up
                     </button>
                 </div>
@@ -54,7 +50,7 @@ const Login = () => {
                     <input ref={emailRef} type='text' placeholder='Email' />
                     <input ref={passwordRef} type='password' placeholder='Password' />
                 </form>
-                <button onClick={loginHandler}>Zaloguj</button>
+                <button onClick={(e) => loginHandler(e)}>Zaloguj</button>
             </div>
         </div>
     )

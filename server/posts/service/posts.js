@@ -64,8 +64,23 @@ const update_like_count = async (req, res) => {
     }
 };
 
+const get_single_post = async (req, res) => {
+    const data = req.body;
+    const postId = data.postId;
+
+    try {
+        const post = await Post.findOne({ '_id': postId })
+
+        return res.status(200).json({success: true, post: post})
+
+    } catch (error) {
+        return res.status(500).json({ success: false });
+    }
+}
+
 module.exports = {
     add_post,
     get_posts,
     update_like_count,
+    get_single_post,
 };
