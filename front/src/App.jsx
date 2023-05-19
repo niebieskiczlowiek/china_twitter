@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import { BrowserRouter, Path, Routes, Route } from "react-router-dom";
-import { Login, Register, Home, Check, Profile, Verify, Post} from "./pages";
+import { Login, Register, Home, Check, Profile, Verify, Post, Hashtag} from "./pages";
 
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
           <Route path="profile" element={<Profile />} />
           {/* <Route path="post/:id" element={<Post />} /> */}
           <Route path="post/:id" element={<Post />} />
+          <Route path="/:tag" element={<Hashtag />} />
 
           {/* <Route path="confirm/:token/:id" element={<Confirm />} /> */}
         </Routes>

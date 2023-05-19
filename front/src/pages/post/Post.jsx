@@ -16,6 +16,9 @@ const Home = () => {
   const [currentUsername, setCurrentUsername] = React.useState('');
   const [currentFullName, setCurrentFullName] = React.useState('');
   const [currentEmail, setCurrentEmail] = React.useState('');
+
+  const [comment, setComment] = React.useState('');
+  const [commentWriter, setCommentWriter] = React.useState(false);
   const navigate = useNavigate();
 
   function checkLogin() {
@@ -118,8 +121,29 @@ const Home = () => {
     }
   };
 
+  const handleCommentChange = (e) => {
+    setComment(e.target.value);
+  }
+
+  const handleCommentSubmit = async () => {
+    const author = [currentFullName, currentUsername]
+    const postId = id;
+    const response = await axios.post('/api/comments/add', { comment, author, currentEmail, postId })
+
+    if (response.data.success) {
+      setComment('');
+      getAllComments();
+      setCommentWriter(false);
+    }
+  };
+
+  const handleCommentWriter = () => {
+    setCommentWriter(!commentWriter);
+  };
+
   const hashtagFilter = async (e) => {
-    console.log(e.target.innerText);
+    const hashtag = e.hashtag;
+    navigate(`/${hashtag}`);
   };
 
   useEffect(() => {
@@ -138,7 +162,7 @@ const Home = () => {
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
       <div className="leftSideContainer">
-        <h1>Home</h1>
+        <h1 onClick={() => navigate('/home')}>Home</h1>
         <button
           className = "tweetButton"
         >
@@ -153,6 +177,32 @@ const Home = () => {
       </div>
 
      <div className="mainContainer">
+
+           {commentWriter
+              ? (
+                <div className="commentWriter">
+                  <form className="form">
+                    <textarea
+                      type="text"
+                      placeholder="Comment"
+                      value={comment}
+                      onChange={handleCommentChange}
+                    />
+                  </form>
+                  <button type="submit"
+                    onClick={
+                      () => {
+                        handleCommentSubmit()
+                      }
+                    }
+                  >
+                    Submit
+                  </button>
+                </div>
+              )
+              : null 
+            }
+
         <div className="post">
           <div className="upperHeader">
 
@@ -194,7 +244,7 @@ const Home = () => {
 
                 <span
                   className="material-symbols-outlined"
-                  // onClick = { () => handleCommentWriter(post._id) }
+                  onClick = {handleCommentWriter}
                 > 
                   mode_comment
                 </span>
@@ -227,7 +277,7 @@ const Home = () => {
             {popularHashtags.map((hashtag,  index) => {
               return (
                 <div className="hashtag"
-                  onClick = { hashtagFilter }
+                  onClick = { () => hashtagFilter(hashtag.hashtag) }
                 >
                   <p>
                     {hashtag.hashtag} ({hashtag.count}) 

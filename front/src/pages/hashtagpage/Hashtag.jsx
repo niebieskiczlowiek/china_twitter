@@ -1,11 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
-import "./Home.scss";
+import "./Hashtag.scss";
 import { useNavigate } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
-const Home = () => {
+const Hashtag = () => {
+  const { tag } = useParams();
   const [postWriter, setPostWriter] = React.useState(false);
   const [commentWriter, setCommentWriter] = React.useState(false);
   const [content, setContent] = React.useState('');
@@ -37,7 +38,9 @@ const Home = () => {
   const getPosts = async () => {
     console.log("GET POSTS")
     try {
-      const response = await axios.get('/api/posts/get');
+      const response = await axios.post('/api/posts/get/hashtag', { tag });
+
+      console.log(response.data.posts, "response data posts")
 
       if (response.data.success) {
         setPosts(response.data.posts)
@@ -49,10 +52,11 @@ const Home = () => {
 
   const updateHashtags = async () => {
     try {
-      const response = await axios.get('/api/hashtags/update_hashtags')
+      const response = await axios.get('/api/hashtags/update_hashtag')
 
       if (response.data.success) {
         console.log(response.data);
+        setPosts(response.data.posts)
       }
     } catch (error) {
       console.log(error);
@@ -74,9 +78,9 @@ const Home = () => {
       const response = await axios.post("/api/posts/add", payload)
 
       if (response.data.success) {
+        getPosts();
         getPopularHashtags();
         setContent("");
-        getPosts();
         updateHashtags();
 
       }
@@ -104,6 +108,7 @@ const Home = () => {
       if (response.data.success) {
         const hashtags = response.data.hashtags;
         setPopularHashtags(hashtags)
+
       }
     } catch (error) {
       console.log(error);
@@ -157,8 +162,8 @@ const Home = () => {
   }
 
   useEffect(() => {
-    checkLogin();
     getPosts();
+    checkLogin();
     getPopularHashtags();
   }, []);
 
@@ -215,6 +220,7 @@ const Home = () => {
       </div>
 
      <div className="mainContainer">
+          <h1>{tag}</h1>
           <div className="posts">
             {posts.map((post, index) => {
               return (
@@ -322,4 +328,4 @@ const Home = () => {
    );
 };
 
-export default Home;
+export default Hashtag;

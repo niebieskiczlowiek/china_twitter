@@ -5,5 +5,6 @@ import Home from "./homepage/Home"
 import Profile from "./profile/Profile"
 import Verify from "./verify/Verify"
 import Post from "./post/Post"
+import Hashtag from "./hashtagpage/Hashtag"
 
-export { Login, Register, Home, Check, Profile, Post, Verify };
+export { Login, Register, Home, Check, Profile, Post, Verify, Hashtag };

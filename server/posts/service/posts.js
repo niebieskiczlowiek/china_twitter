@@ -36,6 +36,23 @@ const get_posts = async (req, res) => {
     }
 };
 
+const get_posts_by_hashtag = async (req, res) => {
+    const data = req.body;
+    const hashtag = data.tag;
+
+    console.log("get by hashtag")
+    console.log(hashtag, "hashtag")
+
+    try {
+        const posts = await Post.find({ hashtags: hashtag });
+        console.log(posts, "posts")
+
+        return res.status(200).json({ success: true, posts })
+    } catch (error) {
+        return res.status(500).json({ success: false });
+    }
+};
+
 const update_like_count = async (req, res) => {
     const data = req.body;
     const email = data.currentEmail;
@@ -109,5 +126,6 @@ module.exports = {
     get_posts,
     update_like_count,
     get_single_post,
-    check_if_liked
+    check_if_liked,
+    get_posts_by_hashtag
 };
