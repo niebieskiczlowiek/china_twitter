@@ -12,7 +12,7 @@ const VerifyUser = async (req, res) => {
             return res.status(404).json({ success: false, message: 'User not found' });
         }
 
-        user.verify = verify === 'true';
+        user.verify = true;
         await user.save();
 
         return res.status(200).json({ success: true, message: "User has been successfully verified" });

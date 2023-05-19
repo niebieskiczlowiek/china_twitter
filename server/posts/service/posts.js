@@ -78,9 +78,36 @@ const get_single_post = async (req, res) => {
     }
 }
 
+const check_if_liked = async (req, res) => {
+    const data = req.body;
+
+    const payload = {
+        postId: data.postId,
+        email: data.email
+    };
+
+    console.log(payload, "payload")
+
+    try {
+        const post = await Post.findOne({ '_id': payload.postId })
+
+        if (post.likedBy.includes(payload.email)) {
+            console.log("true")
+            return res.status(200).json({ success: true, likeStatus: true })
+        }
+        else {
+            console.log("false")
+            return res.status(200).json({ success: true, likeStatus: false })
+        }
+    } catch (error) {
+        return res.status(500).json({ success: false });
+    }
+}
+
 module.exports = {
     add_post,
     get_posts,
     update_like_count,
     get_single_post,
+    check_if_liked
 };
