@@ -1,10 +1,8 @@
 const User = require('../../models/user');
 const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
 
 const VerifyUser = async (req, res) => { 
-    const { token, verified } = req.params;
-
+    const { token, verify } = req.body;
 
     try {
         const decoded = jwt.verify(token, 'my_secret_key');
@@ -14,7 +12,7 @@ const VerifyUser = async (req, res) => {
             return res.status(404).json({ success: false, message: 'User not found' });
         }
 
-        user.verified = verified === 'true';
+        user.verify = verify === 'true';
         await user.save();
 
         return res.status(200).json({ success: true, message: "User has been successfully verified" });
@@ -24,4 +22,6 @@ const VerifyUser = async (req, res) => {
     }
 };
 
-module.exports = VerifyUser;
+module.exports = {
+    VerifyUser,
+}

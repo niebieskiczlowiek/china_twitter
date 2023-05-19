@@ -13,13 +13,9 @@ module.exports = function(app) {
       '/api/hashtags/get_popular',
       '/api/posts/update_likes',
       '/api/comments/add',
-<<<<<<< HEAD
       '/api/verify',
-
-=======
       '/api/comments/get',
       '/api/posts/get_single',
->>>>>>> 02d9fe125db2d8e68e015db76231b07a7df3ee00
     ],
     createProxyMiddleware({
       target: 'http://localhost:8080',

@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect } from "react";
 import "./Home.scss";
 import { useNavigate } from "react-router-dom";
-
 import axios from "axios";
 
 const Home = () => {
@@ -109,7 +108,7 @@ const Home = () => {
       console.log(error);
     }
   };
-
+  
   const handleLike = async (postId) => {
     console.log(postId, "like post id")
     const payload = {
