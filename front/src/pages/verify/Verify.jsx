@@ -6,19 +6,20 @@ import axios from "axios";
 
 
 const Verify = () => {
-    let { token } = useParams(); 
-    console.log(token);
     const navigate = useNavigate();
-    const verifyHandler = async (e) => {
-        e.preventDefault();
-        const response = await axios.post("/api/verify", { token });
-        if (response.data.success) {
-            navigate("/login");
+    const { token } = useParams();
+    const verifyHandler = async () => {
+        try {
+            const response = await axios.post('/api/verify', { token: token });
+            if (response.data.success) {
+                console.log(response.data);
+                console.log("verified");
+                navigate('/login');
+            }
+        } catch (error) {
+            console.log(error);
         }
     };
-    useEffect(() => {
-        verifyHandler();
-    }, []);
 
     return (
         <div className="verify">

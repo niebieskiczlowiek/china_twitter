@@ -25,8 +25,8 @@ const Adduser = async (req, res) => {
       host: 'smtp.gmail.com',
       port: 587,
       auth: {
-        user: 'u17_oliber_waw@technischools.com',
-        // user: 'u19_adaczy_waw@technischools.com',
+        // user: 'u17_oliber_waw@technischools.com',
+        user: 'u19_adaczy_waw@technischools.com',
         pass: password.password,
       }
     });
