@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import "./Home.scss";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { set } from "mongoose";
 
 const Home = () => {
   const [postWriter, setPostWriter] = React.useState(false);
@@ -15,6 +16,7 @@ const Home = () => {
   const [currentUsername, setCurrentUsername] = React.useState('');
   const [currentFullName, setCurrentFullName] = React.useState('');
   const [currentEmail, setCurrentEmail] = React.useState('');
+  const [replyingTo, setReplyingTo] = React.useState('');
   const navigate = useNavigate();
 
   function checkLogin() {
@@ -77,7 +79,7 @@ const Home = () => {
         setContent("");
         getPosts();
         updateHashtags();
-
+        setPostWriter(false);
       }
 
     } catch (error) {
@@ -142,7 +144,8 @@ const Home = () => {
     setPostWriter(!postWriter);
   }
 
-  const handleCommentWriter = (postId) => {
+  const handleCommentWriter = (postId, postAuthor) => {
+    setReplyingTo(postAuthor);
     setCurrentPostId(postId);
     setCommentWriter(!commentWriter);
   }
@@ -164,8 +167,7 @@ const Home = () => {
 
 
   return ( 
-    <div className="home">
-
+    <div className="mainHomePage">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -192,34 +194,6 @@ const Home = () => {
       </div>
 
      <div className="mainContainer">
-        {postWriter
-          ?  ( <div className="postWriter">
-            
-              <div className="closeButton"
-                onClick = {() => setPostWriter(false)}
-              >
-                <div class="material-symbols-outlined">
-                  close
-                </div>
-              </div>
-
-              <form className="form">
-                <textarea
-                  type="text" 
-                  placeholder="Content"
-                  value = {content}
-                  onChange = {handleContentChange}  
-                />
-              </form> 
-
-              <button type="submit"
-                onClick = {handleSubmit}
-              >Submit</button>
-
-            </div> )
-            : null }
-
-
           <div className="newest-posts">
             {posts.map((post) => {
               return (
@@ -266,7 +240,7 @@ const Home = () => {
 
                       <span
                         className="material-symbols-outlined"
-                        onClick={() => handleCommentWriter(post._id)}
+                        onClick={() => handleCommentWriter(post._id, post.username)}
                       > 
                         mode_comment
                       </span>                     
@@ -295,27 +269,72 @@ const Home = () => {
           </div>
       </div>
 
+      {postWriter
+      ?  ( <div className="postWriter">
+            <div className="postWriterContainer">
 
+              
+              <form className="form">
+                <div className="closeButton"
+                  onClick = {() => setPostWriter(false)}
+                >
+                  <div class="material-symbols-outlined">
+                    close
+                  </div>
+                </div>
+
+                <textarea
+                  type="text" 
+                  placeholder="What's up?"
+                  value = {content}
+                  onChange = {handleContentChange}  
+                />
+              </form> 
+            <div className="submitButtonContainer">
+              <button
+                  onClick = {handleSubmit}
+                  className="submitButton"
+                >Post tweet!</button>
+            </div>
+            </div>
+      </div> )
+      : null 
+      }
+    
       {commentWriter
         ? (
           <div className="commentWriter">
-            <form className="form">
-              <textarea
-                type="text"
-                placeholder="Comment"
-                value={comment}
-                onChange={handleCommentChange}
-              />
-            </form>
-            <button type="submit"
-              onClick={
-                () => {
-                  handleCommentSubmit()
-                }
-              }
-            >
-              Submit
-            </button>
+            <div className="commentWriterContainer">
+              <form className="form">
+                <div className="closeButton"
+                  onClick = {() => setCommentWriter(false)}
+                >
+                  <div class="material-symbols-outlined">
+                    close
+                  </div>
+                </div>
+
+                <textarea
+                  className="commentInput"
+                  type="text"
+                  placeholder={`Replying to @${replyingTo}`}
+                  value={comment}
+                  onChange={handleCommentChange}
+                />
+              </form>
+             <div className="submitButtonContainer">
+              <button
+                  className="submitButton"
+                  onClick={
+                    () => {
+                      handleCommentSubmit()
+                    }
+                  }
+                >
+                  Post reply
+                </button>
+             </div>
+            </div>
           </div>
         )
         : null 

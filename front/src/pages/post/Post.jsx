@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import "./Post.scss";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 import axios from "axios";
 import moment from "moment";
 
@@ -16,7 +17,8 @@ const Post = () => {
   const [currentUsername, setCurrentUsername] = React.useState('');
   const [currentFullName, setCurrentFullName] = React.useState('');
   const [currentEmail, setCurrentEmail] = React.useState('');
-
+  const [postWriter, setPostWriter] = React.useState(false);
+  const [content, setContent] = React.useState('');
   const [comment, setComment] = React.useState('');
   const [commentWriter, setCommentWriter] = React.useState(false);
   const navigate = useNavigate();
@@ -137,14 +139,62 @@ const Post = () => {
     }
   };
 
+  const handleSubmit = async () => {
+    let hashtags = content.match(/(?<=#)\w+/g);
+
+    if (!hashtags) {
+      hashtags = [];
+    }
+
+    const payload = {
+      currentFullName, currentUsername ,content, hashtags
+    }
+
+    try {
+      const response = await axios.post("/api/posts/add", payload)
+
+      if (response.data.success) {
+        getPopularHashtags();
+        setContent("");
+        getPost();
+        updateHashtags();
+
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateHashtags = async () => {
+    try {
+      const response = await axios.get('/api/hashtags/update_hashtags')
+
+      if (response.data.success) {
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const handleCommentWriter = () => {
     setCommentWriter(!commentWriter);
+    console.log(commentWriter, "COMMENT WRITER STATUS")
   };
 
   const hashtagFilter = async (e) => {
     const hashtag = e.hashtag;
     navigate(`/${hashtag}`);
   };
+
+  const handlePostWriter = () => {
+    setPostWriter(!postWriter);
+  }
+
+  const handleContentChange = (e) => {
+    setContent(e.target.value);
+  }
 
   useEffect(() => {
     checkLogin();
@@ -158,7 +208,7 @@ const Post = () => {
 
 
   return ( 
-    <div className="post">
+    <div className="viewedPost">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
       
@@ -169,7 +219,7 @@ const Post = () => {
         </div>
 
         <button
-          // onClick = {handlePostWriter}
+          onClick = {handlePostWriter}
           className="tweetButton"
         >
           Tweet
@@ -183,33 +233,10 @@ const Post = () => {
         </div>
 
      <div className="postMainContainer">
-
-           {commentWriter
-              ? (
-                <div className="commentWriter">
-                  <form className="form">
-                    <textarea
-                      type="text"
-                      placeholder="Comment"
-                      value={comment}
-                      onChange={handleCommentChange}
-                    />
-                  </form>
-                  <button type="submit"
-                    onClick={
-                      () => {
-                        handleCommentSubmit()
-                      }
-                    }
-                  >
-                    Submit
-                  </button>
-                </div>
-              )
-              : null 
-            }
-
         <div className="post">
+          <div className="arrowIcon">
+            <FaArrowLeft onClick={() => navigate('/home')} />
+          </div>
           <div className="postHeader">
             <p>{currentPost.fullName}</p>
             <a>@{currentPost.username}</a>
@@ -291,6 +318,61 @@ const Post = () => {
             )}
           </div>
      </div>
+
+     {postWriter
+      ?  ( <div className="postWriter">
+            <div className="postWriterContainer">
+
+              
+              <form className="form">
+                <div className="closeButton"
+                  onClick = {() => setPostWriter(false)}
+                >
+                  <div class="material-symbols-outlined">
+                    close
+                  </div>
+                </div>
+
+                <textarea
+                  type="text" 
+                  placeholder="What's up?"
+                  value = {content}
+                  onChange = {handleContentChange}  
+                />
+              </form> 
+              <button
+                onClick = {handleSubmit}
+                className="submitButton"
+              >Submit</button>
+            </div>
+      </div> )
+      : null 
+      }
+
+     {commentWriter
+        ? (
+          <div className="commentWriter">
+            <form className="form">
+              <textarea
+                type="text"
+                placeholder="Comment"
+                value={comment}
+                onChange={handleCommentChange}
+              />
+            </form>
+            <button type="submit"
+              onClick={
+                () => {
+                  handleCommentSubmit()
+                }
+              }
+            >
+              Sub
+            </button>
+          </div>
+        )
+        : null 
+      }
 
     </div>
 

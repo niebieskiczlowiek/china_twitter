@@ -1,30 +1,9 @@
-.home {
+.mainHomePage{
   display: flex;
   flex-direction: row;
-  margin: 0 auto;
-  position: relative;
-  left: 0;
-  top: 0;
+  justify-content: center;
+  height: 0px;
 
-  .postWriter {
-    z-index: 1;
-    position: absolute;
-    left: 100px;
-
-    .closeButton{
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      cursor: pointer;
-      user-select: none;
-      border-radius: 50%;
-      margin: 5px;
-
-      &:hover {
-        border: 1px solid #c9b1b1;
-      }
-    }
-  }
 
   .homeLeftSideContainer {
     display: flex;
@@ -256,21 +235,156 @@
     }
   }
 
-
-  .commentWriter {
-    display: flex;
-    flex-direction: column;
-    width: 20%;
-    margin: 0 auto;
-    background:rgb(240, 224, 224);
-  
+  .postWriter {
+    z-index: 1;
     position: fixed;
-    left: 0;
-    bottom: 100px;
-  
-    .form {
+    height: 100vh;
+    width: 100%;
+    background: none;
+    backdrop-filter: blur(5px);
+
+    .postWriterContainer {
+      background: white;
+      width: 30%;
+      margin: 0 auto;
+      margin-top: 90px;
       display: flex;
       flex-direction: column;
+      border: 1px solid #e6e6e6;
+      border-radius: 10px;
+      transition: all 0.2s ease-in-out;
+
+
+      .form {
+        margin: 20px;
+        width: 100%;
+
+        .closeButton{
+          position: absolute;
+          right: 10px;
+          top: 10px;
+          cursor: pointer;
+          user-select: none;
+          border-radius: 50%;
+          margin: 5px;
+    
+          &:hover {
+            border: 1px solid #c9b1b1;
+          }         
+        }
+
+        textarea {
+          width: 85%;
+          margin-right: 20px;
+          height: 100px;
+          border: none;
+          border-bottom: 1px solid #e6e6e6;
+          resize: none;
+          font-size: 17px;
+          padding: 10px;
+          margin-bottom: 10px;
+          transition: all 0.2s ease-in-out;
+          &:focus {
+            border-bottom: 1px solid #c62828;
+          }
+        }
+      }
+
+      .submitButtonContainer {
+          display: flex;
+          justify-content: flex-end;
+          .submitButton {
+            margin: 10px;
+            width: 30%;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            background-color: #c62828;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            &:hover {
+              background-color: #e6e6e6;
+              color: black;
+          }
+        }
+      }
+    }
+  }
+
+
+  .commentWriter {
+    z-index: 1;
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    background: none;
+    backdrop-filter: blur(5px);
+
+    .commentWriterContainer {
+      background: white;
+      width: 30%;
+      margin: 0 auto;
+      margin-top: 90px;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #e6e6e6;
+      border-radius: 10px;
+      transition: all 0.2s ease-in-out;
+
+        .form {
+          margin: 20px;
+          width: 100%;
+
+          .closeButton{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 50%;
+            margin: 5px;
+      
+            &:hover {
+              border: 1px solid #c9b1b1;
+            }
+          }
+          
+          textarea {
+            width: 85%;
+            height: 100px;
+            margin-right: 32px;
+            border: none;
+            resize: none;
+            outline: none;
+            padding: 10px;
+            font-size: 17px;
+            transition: all 0.2s ease-in-out;
+            &:focus {
+              border-bottom: 1px solid #c9b1b1;
+            }
+          }
+        }
+      .submitButtonContainer{
+        display: flex;
+        justify-content: flex-end;
+        .submitButton {
+          margin: 10px;
+          width: 30%;
+          padding: 10px;
+          border-radius: 10px;
+          border: none;
+          background-color: #c62828;
+          color: white;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+          &:hover {
+            background-color: #e6e6e6;
+            color: black;
+          }
+        }
+      }
+
     }
   }
 }

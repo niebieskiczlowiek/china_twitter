@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import "./Hashtag.scss";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 import axios from "axios";
 
 const Hashtag = () => {
@@ -174,55 +175,36 @@ const Hashtag = () => {
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-       {postWriter
-        ?  ( <div className="postWriter">
-          
-            <div className="closeButton"
-              onClick = {() => setPostWriter(false)}
-            >
-            <div class="material-symbols-outlined"
-              // onClick = {setPostWriter(false)}
-            >
-              close
-            </div>
-            </div>
-
-            <form className="form">
-              <textarea
-                type="text" 
-                placeholder="Content"
-                value = {content}
-                onChange = {handleContentChange}  
-              />
-            </form> 
-
-            <button type="submit"
-              onClick = {handleSubmit}
-            >Submit</button>
-
-          </div> )
-          : null }
 
       <div className="leftSideContainer">
-        <h1 onClick={() => navigate('/home')}>Home</h1>
-        <button
-          onClick = {handlePostWriter}
-          className = "tweetButton"
-        >
-          Create Post
-        </button>
+        <div className="header">
+            <h1 onClick={() => navigate('/home')}>Home</h1>
+          </div>
 
-        <div className="userInfo">
-          <h1>{currentFullName}</h1> 
-          <p>@{currentUsername}</p>
-        </div>
+          <button
+            onClick = {handlePostWriter}
+            className="tweetButton"
+          >
+            Tweet
+          </button>
 
+          <div className="userInfo">
+            <p className="fullName">{currentFullName}</p> 
+            <p className="username">@{currentUsername}</p>
+          </div>
       </div>
 
      <div className="mainContainer">
-          <h1>{tag}</h1>
+          <div className="tagHeader">
+            <p className="arrowIcon"> 
+              <FaArrowLeft 
+                onClick = {() => navigate('/home')}
+              /> 
+            </p>
+            <p className="tagName">#{tag}</p>
+          </div>
           <div className="posts">
-            {posts.map((post, index) => {
+            {posts.map((post) => {
               return (
                 <div className="post" key={post._id}>
                   <div className="userHeader">
@@ -322,6 +304,36 @@ const Hashtag = () => {
             )}
           </div>
      </div>
+
+     {postWriter
+      ?  ( <div className="postWriter">
+            <div className="postWriterContainer">
+
+              
+              <form className="form">
+                <div className="closeButton"
+                  onClick = {() => setPostWriter(false)}
+                >
+                  <div class="material-symbols-outlined">
+                    close
+                  </div>
+                </div>
+
+                <textarea
+                  type="text" 
+                  placeholder="What's up?"
+                  value = {content}
+                  onChange = {handleContentChange}  
+                />
+              </form> 
+              <button
+                onClick = {handleSubmit}
+                className="submitButton"
+              >Submit</button>
+            </div>
+      </div> )
+      : null 
+      }
 
     </div>
 
