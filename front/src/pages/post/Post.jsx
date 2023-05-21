@@ -319,6 +319,8 @@ const Post = () => {
           </div>
      </div>
 
+     
+
      {postWriter
       ?  ( <div className="postWriter">
             <div className="postWriterContainer">
@@ -340,39 +342,56 @@ const Post = () => {
                   onChange = {handleContentChange}  
                 />
               </form> 
+            <div className="submitButtonContainer">
               <button
-                onClick = {handleSubmit}
-                className="submitButton"
-              >Submit</button>
+                  onClick = {handleSubmit}
+                  className="submitButton"
+                >Post tweet!</button>
+            </div>
             </div>
       </div> )
       : null 
       }
-
-     {commentWriter
+    
+      {commentWriter
         ? (
           <div className="commentWriter">
-            <form className="form">
-              <textarea
-                type="text"
-                placeholder="Comment"
-                value={comment}
-                onChange={handleCommentChange}
-              />
-            </form>
-            <button type="submit"
-              onClick={
-                () => {
-                  handleCommentSubmit()
-                }
-              }
-            >
-              Sub
-            </button>
+            <div className="commentWriterContainer">
+              <form className="form">
+                <div className="closeButton"
+                  onClick = {() => setCommentWriter(false)}
+                >
+                  <div class="material-symbols-outlined">
+                    close
+                  </div>
+                </div>
+
+                <textarea
+                  className="commentInput"
+                  type="text"
+                  placeholder={`Replying to @${currentPost.username}`}
+                  value={comment}
+                  onChange={handleCommentChange}
+                />
+              </form>
+             <div className="submitButtonContainer">
+              <button
+                  className="submitButton"
+                  onClick={
+                    () => {
+                      handleCommentSubmit()
+                    }
+                  }
+                >
+                  Post reply
+                </button>
+             </div>
+            </div>
           </div>
         )
         : null 
       }
+
 
     </div>
 

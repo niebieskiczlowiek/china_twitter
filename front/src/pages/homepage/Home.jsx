@@ -95,6 +95,7 @@ const Home = () => {
     if (response.data.success) {
       setComment('');
       getPosts();
+      setCommentWriter(false);
     }
   };
 

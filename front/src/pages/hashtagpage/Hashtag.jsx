@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import axios from "axios";
+import { set } from "mongoose";
 
 const Hashtag = () => {
   const { tag } = useParams();
@@ -18,6 +19,7 @@ const Hashtag = () => {
   const [currentUsername, setCurrentUsername] = React.useState('');
   const [currentFullName, setCurrentFullName] = React.useState('');
   const [currentEmail, setCurrentEmail] = React.useState('');
+  const [replyingTo, setReplyingTo] = React.useState('');
   const navigate = useNavigate();
 
   function checkLogin() {
@@ -83,6 +85,7 @@ const Hashtag = () => {
         getPopularHashtags();
         setContent("");
         updateHashtags();
+        setPostWriter(!postWriter);
 
       }
 
@@ -99,6 +102,7 @@ const Hashtag = () => {
     if (response.data.success) {
       setComment('');
       getPosts();
+      setCommentWriter(!commentWriter);
     }
   };
 
@@ -149,7 +153,8 @@ const Hashtag = () => {
     setPostWriter(!postWriter);
   }
 
-  const handleCommentWriter = (postId) => {
+  const handleCommentWriter = (postId, postAuthor) => {
+    setReplyingTo(postAuthor);
     setCurrentPostId(postId);
     setCommentWriter(!commentWriter);
   }
@@ -249,7 +254,7 @@ const Hashtag = () => {
 
                       <span
                         className="material-symbols-outlined"
-                        onClick={() => handleCommentWriter(post._id)}
+                        onClick={() => handleCommentWriter(post._id, post.username)}
                       > 
                         mode_comment
                       </span>
@@ -326,14 +331,56 @@ const Hashtag = () => {
                   onChange = {handleContentChange}  
                 />
               </form> 
+            <div className="submitButtonContainer">
               <button
-                onClick = {handleSubmit}
-                className="submitButton"
-              >Submit</button>
+                  onClick = {handleSubmit}
+                  className="submitButton"
+                >Post tweet!</button>
+            </div>
             </div>
       </div> )
       : null 
       }
+    
+      {commentWriter
+        ? (
+          <div className="commentWriter">
+            <div className="commentWriterContainer">
+              <form className="form">
+                <div className="closeButton"
+                  onClick = {() => setCommentWriter(false)}
+                >
+                  <div class="material-symbols-outlined">
+                    close
+                  </div>
+                </div>
+
+                <textarea
+                  className="commentInput"
+                  type="text"
+                  placeholder={`Replying to @${replyingTo}`}
+                  value={comment}
+                  onChange={handleCommentChange}
+                />
+              </form>
+             <div className="submitButtonContainer">
+              <button
+                  className="submitButton"
+                  onClick={
+                    () => {
+                      handleCommentSubmit()
+                    }
+                  }
+                >
+                  Post reply
+                </button>
+             </div>
+            </div>
+          </div>
+        )
+        : null 
+      }
+
 
     </div>
 

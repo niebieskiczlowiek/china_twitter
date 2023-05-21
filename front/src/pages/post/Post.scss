@@ -266,7 +266,7 @@
 
   .postWriter {
     z-index: 1;
-    position: absolute;
+    position: fixed;
     height: 100vh;
     width: 100%;
     background: none;
@@ -284,57 +284,136 @@
       transition: all 0.2s ease-in-out;
 
 
-      .closeButton{
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        cursor: pointer;
-        user-select: none;
-        border-radius: 50%;
-        margin: 5px;
-  
-        &:hover {
-          border: 1px solid #c9b1b1;
-        }
+      .form {
+        margin: 20px;
+        width: 100%;
 
-        .form {
-          margin: 20px;
-          width: 100%;
-        }
-
-        .submitButton {
-          margin-top: 10px;
-          width: 100%;
-          padding: 10px;
-          border-radius: 10px;
-          border: none;
-          background-color: #f5f5f5;
+        .closeButton{
+          position: absolute;
+          right: 10px;
+          top: 10px;
           cursor: pointer;
-          transition: all 0.2s ease-in-out;
+          user-select: none;
+          border-radius: 50%;
+          margin: 5px;
+    
           &:hover {
-            background-color: #e6e6e6;
+            border: 1px solid #c9b1b1;
+          }         
+        }
+
+        textarea {
+          width: 85%;
+          margin-right: 20px;
+          height: 100px;
+          border: none;
+          border-bottom: 1px solid #e6e6e6;
+          resize: none;
+          font-size: 17px;
+          padding: 10px;
+          margin-bottom: 10px;
+          transition: all 0.2s ease-in-out;
+          &:focus {
+            border-bottom: 1px solid #c62828;
+          }
+        }
+      }
+
+      .submitButtonContainer {
+          display: flex;
+          justify-content: flex-end;
+          .submitButton {
+            margin: 10px;
+            width: 30%;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            background-color: #c62828;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            &:hover {
+              background-color: #e6e6e6;
+              color: black;
           }
         }
       }
     }
   }
 
+
   .commentWriter {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: 0 auto;
-    background:rgb(240, 224, 224);
-    z-index: 2;
-    height: 100vh;
-  
+    z-index: 1;
     position: fixed;
-    left: 0;
-    bottom: 100px;
-  
-    .form {
+    height: 100vh;
+    width: 100%;
+    background: none;
+    backdrop-filter: blur(5px);
+
+    .commentWriterContainer {
+      background: white;
+      width: 30%;
+      margin: 0 auto;
+      margin-top: 90px;
       display: flex;
       flex-direction: column;
+      border: 1px solid #e6e6e6;
+      border-radius: 10px;
+      transition: all 0.2s ease-in-out;
+
+        .form {
+          margin: 20px;
+          width: 100%;
+
+          .closeButton{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 50%;
+            margin: 5px;
+      
+            &:hover {
+              border: 1px solid #c9b1b1;
+            }
+          }
+          
+          textarea {
+            width: 85%;
+            height: 100px;
+            margin-right: 32px;
+            border: none;
+            resize: none;
+            outline: none;
+            padding: 10px;
+            font-size: 17px;
+            transition: all 0.2s ease-in-out;
+            &:focus {
+              border-bottom: 1px solid #c9b1b1;
+            }
+          }
+        }
+      .submitButtonContainer{
+        display: flex;
+        justify-content: flex-end;
+        .submitButton {
+          margin: 10px;
+          width: 30%;
+          padding: 10px;
+          border-radius: 10px;
+          border: none;
+          background-color: #c62828;
+          color: white;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+          &:hover {
+            background-color: #e6e6e6;
+            color: black;
+          }
+        }
+      }
+
     }
   }
 }
