@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Login = () => {
+    const [message, setMessage] = React.useState('');
+
     const emailRef = React.createRef();
     const passwordRef = React.createRef();
 
@@ -33,6 +35,9 @@ const Login = () => {
             sessionStorage.setItem("fullName", sessionData.fullName)
             sessionStorage.setItem("email", sessionData.email)
             navigate('/home');
+        } else {
+            console.log(response.data.message)
+            setMessage(response.data.message);
         }
     };
 
@@ -40,17 +45,35 @@ const Login = () => {
         <div className='login'>
             <div className="loginContainer">
                 <h1 className="header">Sign in</h1>
+
                 <div className="links">
                     <button
+                        className="signInButton"
+                        onClick={() => { navigate("/")}}>
+                        Sign in
+                    </button>
+
+                    <button
+                        className="signUpButton"
                         onClick={() => navigate("/register")}>
                         Sign up
                     </button>
                 </div>
+
                 <form className="form">
                     <input ref={emailRef} type='text' placeholder='Email' />
                     <input ref={passwordRef} type='password' placeholder='Password' />
+
+                    {
+                        message && (
+                        <div className="message">
+                            <p>{message}</p>
+                        </div>
+                        )
+                    }
+
+                    <button onClick={(e) => loginHandler(e)}>Zaloguj</button>
                 </form>
-                <button onClick={(e) => loginHandler(e)}>Zaloguj</button>
             </div>
         </div>
     )

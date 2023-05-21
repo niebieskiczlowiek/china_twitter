@@ -1,16 +1,26 @@
 import "./App.css";
 import React from "react";
 import { BrowserRouter, Path, Routes, Route } from "react-router-dom";
-import { Login, Register, Home, Check, Profile, Verify, Post, Hashtag} from "./pages";
+import { SwitchTransition, CSSTransition } from "react-transition-group";
+import { Login, Register, Home, Check, Profile, Verify, Post, Hashtag} from "./pages"
 
 function App() {
+  const supportsHistory = 'pushState' in window.history;
+
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter forceRefresh={!supportsHistory}>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="Register" element={<Register />} />
-          <Route path="Check" element={<Check />} />
+
+        // check connection || test endpoint
+        <Route path="Check" element={<Check />} />
+          
+          // login and register
+            <Route path="/" element={<Login />} />
+            <Route path="register" element={<Register />} />
+
+
+          
           <Route path="Profile" element={<Profile />} />
           <Route path="/confirm/:token" element={<Verify />} />
           <Route path="home" element={<Home />} />

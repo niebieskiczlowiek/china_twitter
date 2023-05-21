@@ -7,7 +7,7 @@ const login = async (req, res) => {
     try {
         const user = await User.findOne({ 'email': data.email });
 
-        if (!user) return res.status(200).json({ success: false });
+        if (!user) return res.status(200).json({ success: false, message: "Incorrect email or password" });
 
         const userInfo = {
             email: user.email,
@@ -23,7 +23,7 @@ const login = async (req, res) => {
             
             return res.status(200).json({ success: true, token, username, fullName, email});
         } else {
-            return res.status(200).json({ success: false });
+            return res.status(200).json({ success: false, message: "Incorrect email or password" });
         } 
     } catch (error) {
         console.log(error)

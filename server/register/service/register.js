@@ -7,8 +7,9 @@ const Adduser = async (req, res) => {
   const data = req.body;
   try {
     const existingUser = await User.findOne({ email: data.email });
+
     if (existingUser) {
-      return res.status(409).json({ success: false, message: 'User with this email already exists' });
+      return res.status(200).json({ success: false, message: 'Email already in use' });
     }
 
     // Dodajemy wartość początkową pola "verified"

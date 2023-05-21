@@ -174,11 +174,9 @@ const Home = () => {
             <div className="closeButton"
               onClick = {() => setPostWriter(false)}
             >
-            <div class="material-symbols-outlined"
-              // onClick = {setPostWriter(false)}
-            >
-              close
-            </div>
+              <div class="material-symbols-outlined">
+                close
+              </div>
             </div>
 
             <form className="form">
@@ -198,12 +196,17 @@ const Home = () => {
           : null }
 
       <div className="leftSideContainer">
-        <h1 onClick={() => navigate('/home')}>Home</h1>
+
+        <div className="header">
+          <h1 onClick={() => navigate('/home')}>Home</h1>
+        </div>
+
+
         <button
           onClick = {handlePostWriter}
-          className = "tweetButton"
+          className="tweetButton"
         >
-          Create Post
+          Tweet
         </button>
 
         <div className="userInfo">
@@ -215,7 +218,7 @@ const Home = () => {
 
      <div className="mainContainer">
           <div className="posts">
-            {posts.map((post, index) => {
+            {/* {posts.map((post, index) => {
               return (
                 <div className="post" key={post._id}>
                   <div className="userHeader">
@@ -295,7 +298,7 @@ const Home = () => {
                   </div>
                 </div>
               )
-            })}
+            })} */}
           </div>
      </div>
      <div className="rightSideContainer">
@@ -314,7 +317,7 @@ const Home = () => {
               }
             )}
           </div>
-     </div>
+      </div>
 
     </div>
 
