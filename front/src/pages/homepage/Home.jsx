@@ -165,37 +165,12 @@ const Home = () => {
 
   return ( 
     <div className="home">
+
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-       {postWriter
-        ?  ( <div className="postWriter">
-          
-            <div className="closeButton"
-              onClick = {() => setPostWriter(false)}
-            >
-              <div class="material-symbols-outlined">
-                close
-              </div>
-            </div>
 
-            <form className="form">
-              <textarea
-                type="text" 
-                placeholder="Content"
-                value = {content}
-                onChange = {handleContentChange}  
-              />
-            </form> 
-
-            <button type="submit"
-              onClick = {handleSubmit}
-            >Submit</button>
-
-          </div> )
-          : null }
-
-      <div className="leftSideContainer">
+      <div className="homeLeftSideContainer">
 
         <div className="header">
           <h1 onClick={() => navigate('/home')}>Home</h1>
@@ -210,17 +185,45 @@ const Home = () => {
         </button>
 
         <div className="userInfo">
-          <h1>{currentFullName}</h1> 
-          <p>@{currentUsername}</p>
+          <p className="fullName">{currentFullName}</p> 
+          <p className="username">@{currentUsername}</p>
         </div>
 
       </div>
 
      <div className="mainContainer">
-          <div className="posts">
-            {/* {posts.map((post, index) => {
+        {postWriter
+          ?  ( <div className="postWriter">
+            
+              <div className="closeButton"
+                onClick = {() => setPostWriter(false)}
+              >
+                <div class="material-symbols-outlined">
+                  close
+                </div>
+              </div>
+
+              <form className="form">
+                <textarea
+                  type="text" 
+                  placeholder="Content"
+                  value = {content}
+                  onChange = {handleContentChange}  
+                />
+              </form> 
+
+              <button type="submit"
+                onClick = {handleSubmit}
+              >Submit</button>
+
+            </div> )
+            : null }
+
+
+          <div className="newest-posts">
+            {posts.map((post) => {
               return (
-                <div className="post" key={post._id}>
+                <div className="single-post" key={post._id}>
                   <div className="userHeader">
                     <p className="fullName">{post.fullName}</p>
                     <p className="username">@{post.username}</p>
@@ -266,42 +269,15 @@ const Home = () => {
                         onClick={() => handleCommentWriter(post._id)}
                       > 
                         mode_comment
-                      </span>
-
-                      {commentWriter
-                        ? (
-                          <div className="commentWriter">
-                            <form className="form">
-                              <textarea
-                                type="text"
-                                placeholder="Comment"
-                                value={comment}
-                                onChange={handleCommentChange}
-                              />
-
-                            </form>
-                            <button type="submit"
-                              onClick={
-                                () => {
-                                  handleCommentSubmit()
-                                }
-                              }
-                            >
-                              Submit
-                            </button>
-                          </div>
-                        )
-                        : null 
-                      }
-
-                     
+                      </span>                     
                   </div>
                 </div>
               )
-            })} */}
+            })}
           </div>
      </div>
-     <div className="rightSideContainer">
+
+     <div className="homeRightSideContainer">
           <h1>Popular hashtags</h1>
           <div className="hashtags">
             {popularHashtags.map((hashtag,  index) => {
@@ -319,8 +295,33 @@ const Home = () => {
           </div>
       </div>
 
-    </div>
 
+      {commentWriter
+        ? (
+          <div className="commentWriter">
+            <form className="form">
+              <textarea
+                type="text"
+                placeholder="Comment"
+                value={comment}
+                onChange={handleCommentChange}
+              />
+            </form>
+            <button type="submit"
+              onClick={
+                () => {
+                  handleCommentSubmit()
+                }
+              }
+            >
+              Submit
+            </button>
+          </div>
+        )
+        : null 
+      }
+
+    </div>
    );
 };
 

@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 
-const Home = () => {
+const Post = () => {
   const { id } = useParams();
   const [postLiked, setPostLiked] = React.useState(false);
   const [currentDate, setCurrentDate] = React.useState('');
@@ -158,25 +158,31 @@ const Home = () => {
 
 
   return ( 
-    <div className="home">
+    <div className="post">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
-      <div className="leftSideContainer">
-        <h1 onClick={() => navigate('/home')}>Home</h1>
+      
+      <div className="postLeftSideContainer">
+
+        <div className="header">
+          <h1 onClick={() => navigate('/home')}>Home</h1>
+        </div>
+
         <button
-          className = "tweetButton"
+          // onClick = {handlePostWriter}
+          className="tweetButton"
         >
-          Create Post
+          Tweet
         </button>
 
         <div className="userInfo">
-          <h1>{currentFullName}</h1> 
-          <p>@{currentUsername}</p>
+          <p className="fullName">{currentFullName}</p> 
+          <p className="username">@{currentUsername}</p>
         </div>
 
-      </div>
+        </div>
 
-     <div className="mainContainer">
+     <div className="postMainContainer">
 
            {commentWriter
               ? (
@@ -204,9 +210,6 @@ const Home = () => {
             }
 
         <div className="post">
-          <div className="upperHeader">
-
-          </div>
           <div className="postHeader">
             <p>{currentPost.fullName}</p>
             <a>@{currentPost.username}</a>
@@ -271,7 +274,7 @@ const Home = () => {
         </div>
       </div>
 
-     <div className="rightSideContainer">
+     <div className="postRightSideContainer">
           <h1>Popular hashtags</h1>
           <div className="hashtags">
             {popularHashtags.map((hashtag,  index) => {
@@ -294,4 +297,4 @@ const Home = () => {
    );
 };
 
-export default Home;
+export default Post;

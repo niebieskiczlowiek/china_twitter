@@ -1,8 +1,6 @@
 .home {
   display: flex;
   flex-direction: row;
-  width: 100%;
-  height: 100vh;
   margin: 0 auto;
   position: relative;
   left: 0;
@@ -28,7 +26,7 @@
     }
   }
 
-  .leftSideContainer{
+  .homeLeftSideContainer {
     display: flex;
     flex-direction: column;
     width: 20%;
@@ -38,6 +36,8 @@
     left: 0;
     top: 0;
     border-right: 1px solid #e6e6e6;
+
+    background: white;
 
    .header {
       display: flex;
@@ -65,24 +65,32 @@
       width: 100%;
       display: flex;
       flex-direction: row;
-      padding: 10px;
-
+      justify-content: right;
       border-top: 1px  solid #cdbdbd;
+
+      &:hover {
+        background-color: #f5f5f5;
+      }
       
-      h1 {
-        font-size: 20px;
+      .fullName {
+        font-size: 15px;
         margin-right: 10px;
+        font-weight: bold;
 
       }
-      p {
+      .username {
+        font-size: 15px;
         color: gray;
+        margin-right: 10px;
       }
     }
 
     .tweetButton {
       background-color: #c62828;
       border: none;
-      border-radius: 5px;
+      border-radius: 50px;
+      width: 80%;
+      align-self: center;
       color: #ffffff;
       cursor: pointer;
       font-size: 1rem;
@@ -98,51 +106,87 @@
   }
 
   .mainContainer {
-    // display: flex;
-    // flex-direction: column;
-    // width: 60%;
-    // height: 100vh;
-    // margin: 0 auto;
-    // position: relative;
-    // left: 0;
-    // top: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f5f5;
+    width: 80%;
+    background-size: cover;
+    height: 100vh;
+    margin: 0 auto;
+    box-shadow: inset 0px 5px 10px rgba(0, 0, 0, 0.1);
+    border: none;
 
-    background: rgb(100, 50, 50);
+    .newest-posts{
+      background-color: #f7f7f7;
+      box-shadow: inset 0px 5px 10px rgba(0, 0, 0, 0.1);
 
-    .posts {
-      .post{
-        background: rgb(255, 255, 255);
+      .single-post{
+        background: white;
         margin: 0 auto;
         margin-top: 30px;
-        width: 50%;
         border-radius: 10px;
         margin-bottom: 10px;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        padding: 20px;
   
-        .userHeader{
+        .userHeader {
           display: flex;
-          font-size: 19px;
-          
-          .fullName {
-            font-weight: bold;
-            margin-right: 10px;
-          }
-          .username{
-            color: gray;
-          }
-        }
-        .contents{
-          border-radius: 10px;
-          padding: 10px;
-          .content {
-            font-size: 15px;
-          }
+          flex-direction: row;
+          align-items: center;
+          padding: 7px;
+          border-bottom: 1px solid #e6e6e6;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
           &:hover {
             background-color: #f5f5f5;
+          }
+  
+          .fullName {
+            font-size: 17px;
+            font-weight: bold;
+            margin-left: 10px;
+          }
+
+          .username {
+            font-size: 17px;
+            color: gray;
+            
+          }
+        }
+        
+        
+        .contents {
+          display: flex;
+          flex-direction: column;
+          padding: 7px;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+          &:hover {
+            background-color: #f5f5f5;
+          }
+  
+          .content {
+            font-size: 17px;
+            margin-bottom: 10px;
+
+            text-align: justify;
           }
         }
   
         .bottomBar{
           display: flex;
+          border-radius: 50px;
+          padding: 7px;
+          align-items: center;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+          &:hover {
+            background-color: #f5f5f5;
+          }
+
 
           .material-symbols-outlined {
             user-select: none;
@@ -175,7 +219,7 @@
     }
   }
 
-  .rightSideContainer {
+  .homeRightSideContainer {
     display: flex;
     flex-direction: column;
     width: 20%;
@@ -185,6 +229,8 @@
     right: 0;
     top: 0;
     border-left: 1px solid #e6e6e6;
+
+    background: white;
 
     h1 {
       font-size: 20px;
@@ -210,6 +256,7 @@
     }
   }
 
+
   .commentWriter {
     display: flex;
     flex-direction: column;
@@ -226,5 +273,4 @@
       flex-direction: column;
     }
   }
-
 }
