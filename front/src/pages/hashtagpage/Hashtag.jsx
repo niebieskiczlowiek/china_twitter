@@ -9,17 +9,26 @@ import { set } from "mongoose";
 
 const Hashtag = () => {
   const { tag } = useParams();
+
+  // Post Writer
   const [postWriter, setPostWriter] = React.useState(false);
-  const [commentWriter, setCommentWriter] = React.useState(false);
   const [content, setContent] = React.useState('');
+
+  // Comment Writer
+  const [commentWriter, setCommentWriter] = React.useState(false);
   const [comment, setComment] = React.useState('');
+  const [replyingTo, setReplyingTo] = React.useState('');
+
+  // Page contents
   const [posts, setPosts] = React.useState([]);
   const [currentPostId , setCurrentPostId] = React.useState('');
   const [popularHashtags, setPopularHashtags] = React.useState([]);
+
+  // User Info
   const [currentUsername, setCurrentUsername] = React.useState('');
   const [currentFullName, setCurrentFullName] = React.useState('');
   const [currentEmail, setCurrentEmail] = React.useState('');
-  const [replyingTo, setReplyingTo] = React.useState('');
+
   const navigate = useNavigate();
 
   function checkLogin() {

@@ -9,16 +9,26 @@ import moment from "moment";
 
 const Post = () => {
   const { id } = useParams();
+
+  // Post info
   const [postLiked, setPostLiked] = React.useState(false);
   const [currentDate, setCurrentDate] = React.useState('');
   const [currentPost, setCurrentPost] = React.useState({});
   const [comments, setComments] = React.useState([]);
+
+  // Hashtags
   const [popularHashtags, setPopularHashtags] = React.useState([]);
+
+  // User info
   const [currentUsername, setCurrentUsername] = React.useState('');
   const [currentFullName, setCurrentFullName] = React.useState('');
   const [currentEmail, setCurrentEmail] = React.useState('');
+
+  // Post writer
   const [postWriter, setPostWriter] = React.useState(false);
   const [content, setContent] = React.useState('');
+
+  // Comment Writer
   const [comment, setComment] = React.useState('');
   const [commentWriter, setCommentWriter] = React.useState(false);
   const navigate = useNavigate();

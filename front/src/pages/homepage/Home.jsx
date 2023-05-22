@@ -6,17 +6,26 @@ import axios from "axios";
 import { set } from "mongoose";
 
 const Home = () => {
-  const [postWriter, setPostWriter] = React.useState(false);
-  const [commentWriter, setCommentWriter] = React.useState(false);
+
+  // Post Writer
   const [content, setContent] = React.useState('');
+  const [postWriter, setPostWriter] = React.useState(false);
+
+  // Comment Writer
+  const [commentWriter, setCommentWriter] = React.useState(false);
   const [comment, setComment] = React.useState('');
-  const [posts, setPosts] = React.useState([]);
   const [currentPostId , setCurrentPostId] = React.useState('');
+  const [replyingTo, setReplyingTo] = React.useState('');
+
+  // Page content
+  const [posts, setPosts] = React.useState([]);
   const [popularHashtags, setPopularHashtags] = React.useState([]);
+
+  // User info
   const [currentUsername, setCurrentUsername] = React.useState('');
   const [currentFullName, setCurrentFullName] = React.useState('');
   const [currentEmail, setCurrentEmail] = React.useState('');
-  const [replyingTo, setReplyingTo] = React.useState('');
+
   const navigate = useNavigate();
 
   function checkLogin() {
