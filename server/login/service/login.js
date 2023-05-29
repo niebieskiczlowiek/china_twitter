@@ -19,9 +19,17 @@ const login = async (req, res) => {
         const email = user.email;
 
         if (data.password === user.password) {
-            const token = jwt.sign({ email: userInfo.email }, "token", { expiresIn: "1h" });
+            if (user.verify === false) {
+                
+                return res.status(200).json({ success: false, message: "Please verify your email" }) 
+            } else {
+
+                const token = jwt.sign({ email: userInfo.email }, "token", { expiresIn: "1h" });
+                return res.status(200).json({ success: true, token, username, fullName, email});
+            }
+
             
-            return res.status(200).json({ success: true, token, username, fullName, email});
+
         } else {
             return res.status(200).json({ success: false, message: "Incorrect email or password" });
         } 

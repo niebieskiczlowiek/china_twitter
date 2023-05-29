@@ -174,6 +174,11 @@ const Hashtag = () => {
     setComment(e.target.value);
   }
 
+  const logOut = () => {
+    sessionStorage.clear();
+    navigate('/');
+  }
+
   useEffect(() => {
     getPosts();
     checkLogin();
@@ -198,6 +203,13 @@ const Hashtag = () => {
             className="tweetButton"
           >
             Tweet
+          </button>
+
+          <button
+            onClick = {logOut}
+            className="logoutButton"
+          >
+            Log out
           </button>
 
           <div className="userInfo">

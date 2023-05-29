@@ -168,6 +168,11 @@ const Home = () => {
     setComment(e.target.value);
   }
 
+  const logOut = () => {
+    sessionStorage.clear();
+    navigate('/');
+  }
+
   useEffect(() => {
     checkLogin();
     getPosts();
@@ -194,6 +199,13 @@ const Home = () => {
           className="tweetButton"
         >
           Tweet
+        </button>
+
+        <button
+          onClick = {logOut}
+          className="logoutButton"
+        >
+          Log out
         </button>
 
         <div className="userInfo">
