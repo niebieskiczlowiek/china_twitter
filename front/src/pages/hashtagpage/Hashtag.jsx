@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import axios from "axios";
-import { set } from "mongoose";
 
 const Hashtag = () => {
   const { tag } = useParams();
@@ -41,7 +40,6 @@ const Hashtag = () => {
       setCurrentUsername(username)
       setCurrentFullName(fullName)
       setCurrentEmail(email)
-
     } else {
       navigate('/');
     }

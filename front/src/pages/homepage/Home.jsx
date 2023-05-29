@@ -25,12 +25,16 @@ const Home = () => {
   const [currentUsername, setCurrentUsername] = React.useState('');
   const [currentFullName, setCurrentFullName] = React.useState('');
   const [currentEmail, setCurrentEmail] = React.useState('');
+  const [userverify, setUserverify] = React.useState('false');
 
   const navigate = useNavigate();
 
   function checkLogin() {
-    const isLoggedIn = sessionStorage.getItem("token")
-    if (isLoggedIn) {
+    const isLoggedIn = sessionStorage.getItem("token");
+    const isverify = sessionStorage.getItem("verfy");
+    console.log(isverify)
+
+    if (isLoggedIn && isverify === 'true') {
       const username = sessionStorage.getItem("username")
       const fullName = sessionStorage.getItem("fullName")
       const email = sessionStorage.getItem("email")
