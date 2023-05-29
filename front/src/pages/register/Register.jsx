@@ -2,6 +2,7 @@ import React from "react";
 import "./Register.scss";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 
 const Register = () => {
@@ -28,6 +29,12 @@ const Register = () => {
     try {
       if (response.data.success) {
         sessionStorage.setItem("token", response.data.token);
+        Swal.fire({
+          icon: 'question',
+          title: 'To Verify your accont click the link',
+          showConfirmButton: false,
+          timer: 1500
+        })
         navigate("/home");
       } else {
         console.log(response.data.message)
