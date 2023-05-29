@@ -206,6 +206,11 @@ const Post = () => {
     setContent(e.target.value);
   }
 
+  const logOut = () => {
+    sessionStorage.clear();
+    navigate('/');
+  }
+
   useEffect(() => {
     checkLogin();
     getPost();
@@ -233,6 +238,13 @@ const Post = () => {
           className="tweetButton"
         >
           Tweet
+        </button>
+
+        <button
+          onClick = {logOut}
+          className="logoutButton"
+        >
+          Log out
         </button>
 
         <div className="userInfo">

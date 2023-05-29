@@ -31,10 +31,9 @@ const Home = () => {
 
   function checkLogin() {
     const isLoggedIn = sessionStorage.getItem("token");
-    const isverify = sessionStorage.getItem("verfy");
-    console.log(isverify)
+    console.log(isLoggedIn);
 
-    if (isLoggedIn && isverify === 'true') {
+    if (isLoggedIn) {
       const username = sessionStorage.getItem("username")
       const fullName = sessionStorage.getItem("fullName")
       const email = sessionStorage.getItem("email")
@@ -172,6 +171,11 @@ const Home = () => {
     setComment(e.target.value);
   }
 
+  const logOut = () => {
+    sessionStorage.clear();
+    navigate('/');
+  }
+
   useEffect(() => {
     checkLogin();
     getPosts();
@@ -198,6 +202,13 @@ const Home = () => {
           className="tweetButton"
         >
           Tweet
+        </button>
+
+        <button
+          onClick = {logOut}
+          className="logoutButton"
+        >
+          Log out
         </button>
 
         <div className="userInfo">

@@ -28,7 +28,7 @@ const Register = () => {
     try {
       if (response.data.success) {
         sessionStorage.setItem("token", response.data.token);
-        navigate("/home");
+        navigate("/");
       } else {
         console.log(response.data.message)
         setMessage(response.data.message);
