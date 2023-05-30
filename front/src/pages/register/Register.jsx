@@ -35,7 +35,6 @@ const Register = () => {
           showConfirmButton: false,
           timer: 1500
         })
-        navigate("/");
       } else {
         console.log(response.data.message)
         setMessage(response.data.message);
